@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hk.culture.mini.program.mapping.CollectionMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.hk.culture.mini.program.entity.Collection">
+        <id column="Tid" property="Tid" />
+        <result column="createTime" property="createTime" />
+        <result column="lastModifyTime" property="lastModifyTime" />
+        <result column="name" property="name" />
+        <result column="number" property="number" />
+        <result column="numberType" property="numberType" />
+        <result column="oldName" property="oldName" />
+        <result column="years" property="years" />
+        <result column="concreteYears" property="concreteYears" />
+        <result column="category" property="category" />
+        <result column="quality" property="quality" />
+        <result column="qualityOne" property="qualityOne" />
+        <result column="qualityTwo" property="qualityTwo" />
+        <result column="count" property="count" />
+        <result column="length" property="length" />
+        <result column="height" property="height" />
+        <result column="width" property="width" />
+        <result column="concreteSize" property="concreteSize" />
+        <result column="massRang" property="massRang" />
+        <result column="mass" property="mass" />
+        <result column="massType" property="massType" />
+        <result column="degree" property="degree" />
+        <result column="origin" property="origin" />
+        <result column="complete" property="complete" />
+        <result column="completeDetail" property="completeDetail" />
+        <result column="conditionString" property="conditionString" />
+        <result column="inYear" property="inYear" />
+        <result column="concreteInYear" property="concreteInYear" />
+        <result column="author" property="author" />
+        <result column="version" property="version" />
+        <result column="cunjuan" property="cunjuan" />
+        <result column="state" property="state" />
+        <result column="useState" property="useState" />
+        <result column="middleCount" property="middleCount" />
+        <result column="inorout" property="inorout" />
+        <result column="responsible" property="responsible" />
+        <result column="storeRoom" property="storeRoom" />
+        <result column="init" property="init" />
+        <result column="allow" property="allow" />
+        <result column="image" property="image" />
+        <result column="imageTid" property="imageTid" />
+        <result column="ecpCode" property="ecpCode" />
+        <result column="ecpTid" property="ecpTid" />
+        <result column="ecpQRCode" property="ecpQRCode" />
+        <result column="imageCode" property="imageCode" />
+        <result column="depreciation" property="depreciation" />
+        <result column="scrapcondition" property="scrapcondition" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        Tid, createTime, lastModifyTime, name, number, numberType, oldName, years, concreteYears, category, quality, qualityOne, qualityTwo, count, length, height, width, concreteSize, massRang, mass, massType, degree, origin, complete, completeDetail, conditionString, inYear, concreteInYear, author, version, cunjuan, state, useState, middleCount, inorout, responsible, storeRoom, init, allow, image, imageTid, ecpCode, ecpTid, ecpQRCode, imageCode, depreciation, scrapcondition
+    </sql>
+
+</mapper>

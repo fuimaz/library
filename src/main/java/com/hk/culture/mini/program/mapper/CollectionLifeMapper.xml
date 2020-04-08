@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hk.culture.mini.program.mapping.CollectionLifeMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.hk.culture.mini.program.entity.CollectionLife">
+        <id column="Tid" property="Tid" />
+        <result column="ecpCode" property="ecpCode" />
+        <result column="createTime" property="createTime" />
+        <result column="lastMidifyTime" property="lastMidifyTime" />
+        <result column="operationType" property="operationType" />
+        <result column="operationPerson" property="operationPerson" />
+        <result column="operationDetail" property="operationDetail" />
+        <result column="state" property="state" />
+        <result column="useState" property="useState" />
+        <result column="toPlace" property="toPlace" />
+        <result column="storeRoom" property="storeRoom" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        Tid, ecpCode, createTime, lastMidifyTime, operationType, operationPerson, operationDetail, state, useState, toPlace, storeRoom
+    </sql>
+
+</mapper>

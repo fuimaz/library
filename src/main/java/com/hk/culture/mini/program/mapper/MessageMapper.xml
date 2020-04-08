@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hk.culture.mini.program.mapping.MessageMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.hk.culture.mini.program.entity.Message">
+        <id column="TID" property="tid" />
+        <result column="module" property="module" />
+        <result column="function" property="function" />
+        <result column="detail" property="detail" />
+        <result column="remarks" property="remarks" />
+        <result column="phone" property="phone" />
+        <result column="text" property="text" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        TID, module, function, detail, remarks, phone, text
+    </sql>
+
+</mapper>

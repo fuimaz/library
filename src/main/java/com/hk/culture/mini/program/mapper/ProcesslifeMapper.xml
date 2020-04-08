@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hk.culture.mini.program.mapping.ProcesslifeMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.hk.culture.mini.program.entity.Processlife">
+        <id column="TID" property="tid" />
+        <result column="processGroup" property="processGroup" />
+        <result column="fromPerson" property="fromPerson" />
+        <result column="toApproval" property="toApproval" />
+        <result column="result" property="result" />
+        <result column="remarks" property="remarks" />
+        <result column="dep" property="dep" />
+        <result column="operateTime" property="operateTime" />
+        <result column="operator" property="operator" />
+        <result column="startMan" property="startMan" />
+        <result column="allProcessTID" property="allProcessTID" />
+        <result column="lastOperator" property="lastOperator" />
+        <result column="lastTID" property="lastTID" />
+        <result column="processlistTid" property="processlistTid" />
+        <result column="sequence" property="sequence" />
+        <result column="type" property="type" />
+        <result column="toPerson" property="toPerson" />
+        <result column="insertTime" property="insertTime" />
+        <result column="lastOperateTime" property="lastOperateTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        TID, processGroup, fromPerson, toApproval, result, remarks, dep, operateTime, operator, startMan, allProcessTID, lastOperator, lastTID, processlistTid, sequence, type, toPerson, insertTime, lastOperateTime
+    </sql>
+
+</mapper>
