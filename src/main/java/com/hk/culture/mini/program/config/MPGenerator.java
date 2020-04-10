@@ -21,7 +21,7 @@ public class MPGenerator {
         //全局配置
         GlobalConfig gc = new GlobalConfig();
         gc.setOpen(false);
-        gc.setOutputDir("/Users/jiman/workspace/culture-mini-program/src/main/java");
+        gc.setOutputDir("/Users/jiman/workspace/culture-mini-program/gencode/src/main/java");
         gc.setFileOverride(false); //是否覆盖已有文件
         gc.setBaseResultMap(true); //XML是否需要BaseResultMap
         gc.setBaseColumnList(true); //XML是否显示字段
@@ -36,10 +36,10 @@ public class MPGenerator {
         //数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
         dsc.setDbType(DbType.MYSQL);
-        dsc.setDriverName("com.mysql.jdbc.Driver");
+        dsc.setDriverName("com.mysql.cj.jdbc.Driver");
         dsc.setUrl("jdbc:mysql://localhost:3306/test?characterEncoding=utf8&useSSL=false");
         dsc.setUsername("root");
-        dsc.setPassword("fuimazv8p");
+        dsc.setPassword("test1234");
         mpg.setDataSource(dsc);
         //策略配置
         StrategyConfig sc = new StrategyConfig();

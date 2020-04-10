@@ -1,13 +1,19 @@
 package com.hk.culture.mini.program.controller;
 
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.hk.culture.mini.program.common.constant.ReturnCodeEnum;
+import com.hk.culture.mini.program.common.utils.BeanUtil;
+import com.hk.culture.mini.program.dto.query.PagesQuery;
+import com.hk.culture.mini.program.dto.vo.ActivityVO;
+import com.hk.culture.mini.program.dto.vo.Result;
 import com.hk.culture.mini.program.entity.Activity;
 import com.hk.culture.mini.program.service.ActivityService;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
@@ -17,25 +23,34 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @author
  * @since 2020-04-08
  */
-@Controller
+@RestController
 @RequestMapping("/activity")
 @ResponseBody
 public class ActivityController {
     @Autowired
     private ActivityService activityService;
 
-    @RequestMapping("/add")
-    public void add() {
-        Activity activity = new Activity();
-        activity.setActivityName("1");
-        activity.setAsstCompany("1");
-        activityService.save(activity);
+    @RequestMapping("/get/{id}")
+    public Result<ActivityVO> get(@PathVariable("id") String id) {
+        if (StringUtils.isEmpty(id)) {
+            return Result.error(ReturnCodeEnum.PARAM_ERROR);
+        }
+
+        Activity activity = activityService.getById(id);
+
+        return Result.success(BeanUtil.convertToBean(activity, ActivityVO.class));
     }
 
-    @RequestMapping("/get")
-    public Object get() {
+    @PostMapping("/list")
+    public Result<Page<ActivityVO>> list(@RequestBody PagesQuery<Activity> pagesQuery) {
+        IPage<Activity> activityIPage = activityService.listByCondition(pagesQuery);
+        if (activityIPage == null || CollectionUtils.isEmpty(activityIPage.getRecords())) {
+            return Result.success(activityIPage);
+        }
 
-        return activityService.getById("1");
+        IPage<ActivityVO> activityVOIPage = activityIPage.convert(activity -> BeanUtil.convertToBean(activity, ActivityVO.class));
+
+        return Result.success(activityIPage);
     }
 
     @RequestMapping("/hello")

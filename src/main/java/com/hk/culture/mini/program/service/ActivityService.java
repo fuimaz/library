@@ -1,7 +1,9 @@
 package com.hk.culture.mini.program.service;
 
-import com.hk.culture.mini.program.entity.Activity;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.hk.culture.mini.program.dto.query.PagesQuery;
+import com.hk.culture.mini.program.entity.Activity;
 
 /**
  * <p>
@@ -13,4 +15,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface ActivityService extends IService<Activity> {
 
+    public IPage<Activity> listByCondition(PagesQuery<Activity> pagesQuery);
 }
