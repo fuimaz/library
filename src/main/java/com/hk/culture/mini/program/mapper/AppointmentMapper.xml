@@ -12,12 +12,13 @@
         <result column="type" property="type" />
         <result column="process" property="process" />
         <result column="memberTid" property="memberTid" />
+        <result column="bookTid" property="bookTid" />
         <result column="way" property="way" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        TID, name, phone, dateTime, depot, type, process, memberTid, way
+        TID, name, phone, dateTime, depot, type, process, memberTid, bookTid, way
     </sql>
 
 </mapper>

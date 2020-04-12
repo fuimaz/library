@@ -13,4 +13,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface AppointmentService extends IService<Appointment> {
 
+//    int bookedActiveRecordCount(String phone, String type, String memberTid);
+
+
+//    Appointment getOneByUserAndId(String phone, String sceneId, String memberTid);
+
 }

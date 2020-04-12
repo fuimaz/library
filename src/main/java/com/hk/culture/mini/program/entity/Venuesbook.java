@@ -1,15 +1,16 @@
 package com.hk.culture.mini.program.entity;
 
-import java.math.BigDecimal;
-import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.TableField;
-import java.io.Serializable;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -17,7 +18,7 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author 
- * @since 2020-04-08
+ * @since 2020-04-12
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -27,7 +28,7 @@ public class Venuesbook implements Serializable {
 
     private static final long serialVersionUID=1L;
 
-    @TableId(value = "TID", type = IdType.AUTO)
+    @TableId(value = "TID", type = IdType.UUID)
     private String tid;
 
     @TableField("venuesTid")
@@ -51,6 +52,8 @@ public class Venuesbook implements Serializable {
 
     @TableField("hourCost")
     private BigDecimal hourCost;
+
+    private String state;
 
 
 }

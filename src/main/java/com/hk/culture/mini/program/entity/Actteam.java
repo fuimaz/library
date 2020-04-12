@@ -25,7 +25,7 @@ public class Actteam implements Serializable {
 
     private static final long serialVersionUID=1L;
 
-    @TableId(value = "TID", type = IdType.AUTO)
+    @TableId(value = "TID", type = IdType.UUID)
     private String tid;
 
     /**

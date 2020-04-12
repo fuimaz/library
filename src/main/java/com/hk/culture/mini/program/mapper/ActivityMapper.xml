@@ -6,6 +6,8 @@
     <resultMap id="BaseResultMap" type="com.hk.culture.mini.program.entity.Activity">
         <id column="TID" property="tid" />
         <result column="activityName" property="activityName" />
+        <result column="activityDesc" property="activityDesc" />
+        <result column="activityType" property="activityType" />
         <result column="responsible" property="responsible" />
         <result column="isVerify" property="isVerify" />
         <result column="remarks" property="remarks" />
@@ -22,11 +24,12 @@
         <result column="image" property="image" />
         <result column="video" property="video" />
         <result column="authMan" property="authMan" />
+        <result column="booked" property="booked" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        TID, activityName, responsible, isVerify, remarks, stratTime, endTime, depot, orders, company, asstCompany, responsiblePhone, funds, oneCost, state, image, video, authMan
+        TID, activityName, activityDesc, activityType, responsible, isVerify, remarks, stratTime, endTime, depot, orders, company, asstCompany, responsiblePhone, funds, oneCost, state, image, video, authMan, booked
     </sql>
 
 </mapper>

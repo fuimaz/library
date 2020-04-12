@@ -29,7 +29,7 @@ public class Dateresource implements Serializable {
     /**
      * 预约资源库
      */
-    @TableId(value = "TID", type = IdType.AUTO)
+    @TableId(value = "TID", type = IdType.UUID)
     private String tid;
 
     /**

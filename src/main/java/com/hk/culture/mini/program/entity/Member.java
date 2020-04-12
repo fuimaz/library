@@ -28,7 +28,7 @@ public class Member implements Serializable {
     /**
      * 会员表
      */
-    @TableId(value = "TID", type = IdType.AUTO)
+    @TableId(value = "TID", type = IdType.UUID)
     private String tid;
 
     private String name;

@@ -4,6 +4,9 @@ public enum StateEnum {
 
     DISABLE("0"),
     ENABLE("1"),
+    CANCEL("2"),
+    AUDITING("3"),
+    Booked("4"),
     ;
 
     private String state;

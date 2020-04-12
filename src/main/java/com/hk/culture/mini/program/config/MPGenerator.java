@@ -22,7 +22,7 @@ public class MPGenerator {
         GlobalConfig gc = new GlobalConfig();
         gc.setOpen(false);
         gc.setOutputDir("/Users/jiman/workspace/culture-mini-program/gencode/src/main/java");
-        gc.setFileOverride(false); //是否覆盖已有文件
+        gc.setFileOverride(true); //是否覆盖已有文件
         gc.setBaseResultMap(true); //XML是否需要BaseResultMap
         gc.setBaseColumnList(true); //XML是否显示字段
         gc.setControllerName("%sController");
@@ -31,7 +31,7 @@ public class MPGenerator {
         gc.setMapperName("%sMapper");
         gc.setXmlName("%sMapper");
         gc.setAuthor("");
-        gc.setIdType(IdType.AUTO);
+        gc.setIdType(IdType.UUID);
         mpg.setGlobalConfig(gc);    
         //数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
@@ -54,7 +54,7 @@ public class MPGenerator {
         pc.setEntity("entity");
         pc.setController("controller");
         pc.setService("service");
-        pc.setServiceImpl("serviceImpl");
+        pc.setServiceImpl("service.impl");
         pc.setMapper("mapping");
         pc.setXml("mapper");
         mpg.setPackageInfo(pc);

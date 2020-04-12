@@ -26,7 +26,7 @@ public class CollectionLife implements Serializable {
 
     private static final long serialVersionUID=1L;
 
-    @TableId(value = "Tid", type = IdType.AUTO)
+    @TableId(value = "Tid", type = IdType.UUID)
     private String Tid;
 
     /**

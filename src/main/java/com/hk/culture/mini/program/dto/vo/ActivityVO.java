@@ -27,6 +27,16 @@ public class ActivityVO implements Serializable {
     private String activityName;
 
     /**
+     * 活动介绍
+     */
+    private String activityDesc;
+
+    /**
+     * 活动类别
+     */
+    private String activityType;
+
+    /**
      * 活动负责人
      */
     private String responsible;
@@ -95,5 +105,10 @@ public class ActivityVO implements Serializable {
      * 活动视频
      */
     private String video;
+
+    /**
+     * 已预约人数
+     */
+    private String booked;
 
 }

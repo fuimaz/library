@@ -1,15 +1,16 @@
 package com.hk.culture.mini.program.entity;
 
-import java.math.BigDecimal;
-import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.TableField;
-import java.io.Serializable;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -17,7 +18,7 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author 
- * @since 2020-04-08
+ * @since 2020-04-11
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -27,7 +28,7 @@ public class Activity implements Serializable {
 
     private static final long serialVersionUID=1L;
 
-    @TableId(value = "TID", type = IdType.AUTO)
+    @TableId(value = "TID", type = IdType.UUID)
     private String tid;
 
     /**
@@ -35,6 +36,18 @@ public class Activity implements Serializable {
      */
     @TableField("activityName")
     private String activityName;
+
+    /**
+     * 活动介绍
+     */
+    @TableField("activityDesc")
+    private String activityDesc;
+
+    /**
+     * 活动类别
+     */
+    @TableField("activityType")
+    private String activityType;
 
     /**
      * 活动负责人
@@ -122,6 +135,11 @@ public class Activity implements Serializable {
      */
     @TableField("authMan")
     private String authMan;
+
+    /**
+     * 已预约人数
+     */
+    private String booked;
 
 
 }

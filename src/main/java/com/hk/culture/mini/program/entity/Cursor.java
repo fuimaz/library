@@ -25,7 +25,7 @@ public class Cursor implements Serializable {
 
     private static final long serialVersionUID=1L;
 
-    @TableId(value = "tid", type = IdType.AUTO)
+    @TableId(value = "tid", type = IdType.UUID)
     private String tid;
 
     private String monumentsTid;

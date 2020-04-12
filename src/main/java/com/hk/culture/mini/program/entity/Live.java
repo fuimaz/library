@@ -29,7 +29,7 @@ public class Live implements Serializable {
     /**
      * 直播表
      */
-    @TableId(value = "TID", type = IdType.AUTO)
+    @TableId(value = "TID", type = IdType.UUID)
     private String tid;
 
     /**

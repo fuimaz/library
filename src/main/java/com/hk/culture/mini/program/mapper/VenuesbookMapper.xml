@@ -13,11 +13,12 @@
         <result column="responsible" property="responsible" />
         <result column="responsiblePhone" property="responsiblePhone" />
         <result column="hourCost" property="hourCost" />
+        <result column="state" property="state" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        TID, venuesTid, booktime, activityTid, activityName, venuesName, responsible, responsiblePhone, hourCost
+        TID, venuesTid, booktime, activityTid, activityName, venuesName, responsible, responsiblePhone, hourCost, state
     </sql>
 
 </mapper>

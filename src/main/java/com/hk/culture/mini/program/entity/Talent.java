@@ -27,7 +27,7 @@ public class Talent implements Serializable {
     /**
      * 文艺人才表
      */
-    @TableId(value = "TID", type = IdType.AUTO)
+    @TableId(value = "TID", type = IdType.UUID)
     private String tid;
 
     private String name;

@@ -2,7 +2,11 @@ package com.hk.culture.mini.program.common.constant;
 
 public enum ReturnCodeEnum {
     SUCCESS(1001, "success"),
-    PARAM_ERROR(1002, "param missing"),
+    FAILED(1002, "faield"),
+    PARAM_ERROR(1003, "param missing"),
+    STATE_ERROR(1004, "state error"),
+    OVER_LIMIT(1005, "times over limit"),
+    RECORD_EXISTS(1006, "record exists, don't repeat submit"),
     ;
 
     private String msg;

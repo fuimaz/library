@@ -16,7 +16,7 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author 
- * @since 2020-04-08
+ * @since 2020-04-12
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -26,7 +26,7 @@ public class Appointment implements Serializable {
 
     private static final long serialVersionUID=1L;
 
-    @TableId(value = "TID", type = IdType.AUTO)
+    @TableId(value = "TID", type = IdType.UUID)
     private String tid;
 
     /**
@@ -65,6 +65,12 @@ public class Appointment implements Serializable {
      */
     @TableField("memberTid")
     private String memberTid;
+
+    /**
+     * 预约记录的TID
+     */
+    @TableField("bookTid")
+    private String bookTid;
 
     /**
      * 预约方式  PC或手机
