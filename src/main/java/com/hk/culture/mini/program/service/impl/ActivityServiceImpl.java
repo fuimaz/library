@@ -8,9 +8,9 @@ import com.hk.culture.mini.program.common.constant.BookTypeEnum;
 import com.hk.culture.mini.program.common.constant.ReturnCodeEnum;
 import com.hk.culture.mini.program.common.constant.StateEnum;
 import com.hk.culture.mini.program.common.utils.CalenderUtils;
+import com.hk.culture.mini.program.dto.Result;
 import com.hk.culture.mini.program.dto.query.ActivityBookQuery;
 import com.hk.culture.mini.program.dto.query.PagesQuery;
-import com.hk.culture.mini.program.dto.Result;
 import com.hk.culture.mini.program.entity.Activity;
 import com.hk.culture.mini.program.entity.Appointment;
 import com.hk.culture.mini.program.entity.Venuesbook;
@@ -23,8 +23,8 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
@@ -60,11 +60,11 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
         QueryWrapper<Activity> wrapper = new QueryWrapper();
         Activity activity = pagesQuery.getData();
         if (StringUtils.isNotEmpty(activity.getActivityName())) {
-            wrapper.like("activityName", String.format("*%s*", activity.getActivityName()));
+            wrapper.like("activityName", "%" + activity.getActivityName() + "%");
         }
 
-        if (StringUtils.isNotEmpty(activity.getActivityName())) {
-            wrapper.like("depot", activity.getDepot());
+        if (StringUtils.isNotEmpty(activity.getDepot())) {
+            wrapper.like("depot", "%" + activity.getDepot() + "%");
         }
 
         wrapper.eq("state", StateEnum.ENABLE.getState());
@@ -131,14 +131,8 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
             return Result.error(ReturnCodeEnum.STATE_ERROR, "活动已约满");
         }
 
-        if (StateEnum.ENABLE != StateEnum.valueOf(activity.getState())) {
+        if (StateEnum.ENABLE != StateEnum.getValue(activity.getState())) {
             return Result.error(ReturnCodeEnum.STATE_ERROR, "活动不可预约");
-        }
-
-        if (!addBooked(activity.getTid(), activity.getBooked())) {
-            log.error("update activity book record failed, tid={}, phone={}, booked={}",
-                    activityBookQuery.getTid(), activityBookQuery.getMobile(), activity.getBooked());
-            return Result.error(ReturnCodeEnum.FAILED, "预约失败");
         }
 
         Result<Boolean> addBookRecord = addBookRecord(activityBookQuery, activity);
@@ -153,17 +147,27 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
         return Result.success(true);
     }
 
+    @Transactional
     private Result addBookRecord(ActivityBookQuery activityBookQuery, Activity activity) {
+        // 只有更新成功才能继续，避免并发问题
+        if (!addBooked(activity.getTid(), activity.getBooked())) {
+            log.error("update activity book record failed, tid={}, phone={}, booked={}",
+                    activityBookQuery.getTid(), activityBookQuery.getMobile(), activity.getBooked());
+            return Result.error(ReturnCodeEnum.FAILED, "预约失败");
+        }
+
         Venuesbook venuesbook = new Venuesbook();
         venuesbook.setResponsiblePhone(activityBookQuery.getMobile());
         venuesbook.setResponsible(activityBookQuery.getResponsible());
         venuesbook.setActivityName(activity.getActivityName());
         venuesbook.setActivityTid(activity.getTid());
+        venuesbook.setVenuesTid("");
+        venuesbook.setVenuesName("");
         venuesbook.setBooktime(activityBookQuery.getBookTime());
         venuesbook.setState(StateEnum.AUDITING.getState());
-        venuesbook.setHourCost(new BigDecimal(0));
+        venuesbook.setHourCost(activity.getOneCost());
 
-        // todo 预约表是否需要添加唯一性索引，但同一场馆可能可以多次预约
+        // todo 预约表是否需要添加唯一性索引
         boolean ret = venuesbookService.save(venuesbook);
         if (!ret) {
             log.error("add activity book record failed, tid={}, phone={}",
@@ -216,7 +220,7 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
      * @return
      */
     public boolean addBooked(String tid, String booked) {
-        // 当已预约人数与查询时一致才更新，解决并发问题
+        // 当已预约人数与查询时一致才更新
         QueryWrapper<Activity> wrapper = new QueryWrapper();
         wrapper.eq("TID", tid);
         wrapper.eq("booked", booked);

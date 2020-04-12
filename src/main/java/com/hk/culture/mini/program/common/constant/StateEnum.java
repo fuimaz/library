@@ -18,4 +18,18 @@ public enum StateEnum {
     public String getState() {
         return state;
     }
+
+    public static StateEnum getValue(String state) {
+        for (StateEnum stateEnum : StateEnum.values()) {
+            if (stateEnum.getState().equals(state)) {
+                return stateEnum;
+            }
+        }
+
+        return null;
+    }
+
+    public String toString() {
+        return super.toString() + "(" + state + ")";
+    }
 }

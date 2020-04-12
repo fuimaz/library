@@ -541,7 +541,7 @@ CREATE TABLE `volunteerwork`  (
 -- Table structure for votestore
 -- ----------------------------
 DROP TABLE IF EXISTS `votestore`;
-CREATE TABLE `votestore`  (
+CREATE TABLE `votestore`
   `TID` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `sequence` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,

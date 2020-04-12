@@ -61,7 +61,7 @@ public class VenuesbookServiceImpl extends ServiceImpl<VenuesbookMapper, Venuesb
 
         wrapper.in("state", StateEnum.ENABLE.getState(), StateEnum.AUDITING.getState());
         wrapper.setEntity(venuesbook);
-        wrapper.orderByDesc("dateTime");
+        wrapper.orderByDesc("bookTime");
 
         Venuesbook res = getBaseMapper().selectOne(wrapper);
 

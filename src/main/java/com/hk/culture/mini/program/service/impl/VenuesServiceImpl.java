@@ -21,8 +21,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 /**
@@ -71,7 +71,7 @@ public class VenuesServiceImpl extends ServiceImpl<VenuesMapper, Venues> impleme
 
 
     /**
-     * 预约活动
+     * 预约场馆
      * @param venuesBookQuery
      * @return
      */
@@ -91,15 +91,8 @@ public class VenuesServiceImpl extends ServiceImpl<VenuesMapper, Venues> impleme
             return Result.error(ReturnCodeEnum.STATE_ERROR, "场馆预约已结束");
         }
 
-        if (StateEnum.ENABLE != StateEnum.valueOf(venues.getState())) {
+        if (StateEnum.ENABLE != StateEnum.getValue(venues.getState())) {
             return Result.error(ReturnCodeEnum.STATE_ERROR, "场馆不可预约");
-        }
-
-        // 只有更新成功才能继续，避免并发问题
-        if (!addBooked(venues.getTid())) {
-            log.error("update venues state failed, tid={}, phone={}, state={}",
-                    venuesBookQuery.getTid(), venuesBookQuery.getMobile(), venues.getState());
-            return Result.error(ReturnCodeEnum.FAILED, "预约失败");
         }
 
         Result<Boolean> addBookRecord = addBookRecord(venuesBookQuery, venues);
@@ -147,18 +140,26 @@ public class VenuesServiceImpl extends ServiceImpl<VenuesMapper, Venues> impleme
         return Result.success(true);
     }
 
+    @Transactional
     private Result addBookRecord(VenuesBookQuery venuesBookQuery, Venues venues) {
+        // 只有更新成功才能继续
+        if (!addBooked(venues.getTid())) {
+            log.error("update venues state failed, tid={}, phone={}, state={}",
+                    venuesBookQuery.getTid(), venuesBookQuery.getMobile(), venues.getState());
+            return Result.error(ReturnCodeEnum.FAILED, "预约失败");
+        }
+
         Venuesbook venuesbook = new Venuesbook();
         venuesbook.setResponsiblePhone(venuesBookQuery.getMobile());
         venuesbook.setResponsible(venuesBookQuery.getResponsible());
-//        venuesbook.setTid("");
+        venuesbook.setActivityName("");
+        venuesbook.setActivityTid("");
         venuesbook.setVenuesName(venues.getName());
         venuesbook.setVenuesTid(venues.getTid());
         venuesbook.setState(StateEnum.AUDITING.getState());
-        venuesbook.setHourCost(new BigDecimal(0));
+        venuesbook.setHourCost(venues.getHourCost());
         venuesbook.setBooktime(venuesBookQuery.getBookTime());
 
-        // todo 预约表是否需要添加唯一性索引，但同一场馆可能可以多次预约
         boolean ret = venuesbookService.save(venuesbook);
         if (!ret) {
             log.error("add venues book record failed, tid={}, phone={}",

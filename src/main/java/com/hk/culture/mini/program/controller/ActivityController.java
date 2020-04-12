@@ -5,9 +5,10 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hk.culture.mini.program.common.constant.ReturnCodeEnum;
 import com.hk.culture.mini.program.common.utils.BeanUtil;
+import com.hk.culture.mini.program.dto.Result;
+import com.hk.culture.mini.program.dto.query.ActivityBookQuery;
 import com.hk.culture.mini.program.dto.query.PagesQuery;
 import com.hk.culture.mini.program.dto.vo.ActivityVO;
-import com.hk.culture.mini.program.dto.Result;
 import com.hk.culture.mini.program.entity.Activity;
 import com.hk.culture.mini.program.service.ActivityService;
 import org.apache.commons.collections.CollectionUtils;
@@ -62,17 +63,14 @@ public class ActivityController {
     }
 
 
-//    @PostMapping("/book")
-//    public Result book(@RequestBody ActivityBookQuery activityBookQuery) {
-//        IPage<Activity> activityIPage = activityService.listByCondition(pagesQuery);
-//        if (activityIPage == null || CollectionUtils.isEmpty(activityIPage.getRecords())) {
-//            return Result.success(activityIPage);
-//        }
-//
-//        IPage<ActivityVO> activityVOIPage = activityIPage.convert(activity -> BeanUtil.convertToBean(activity, ActivityVO.class));
-//
-//        return Result.success(activityIPage);
-//    }
+    @PostMapping("/book")
+    public Result book(@RequestBody ActivityBookQuery activityBookQuery) {
+        if (activityBookQuery == null) {
+            return Result.error(ReturnCodeEnum.PARAM_ERROR);
+        }
+
+        return activityService.book(activityBookQuery);
+    }
 
     @RequestMapping("/hello")
     public Object hello() {
