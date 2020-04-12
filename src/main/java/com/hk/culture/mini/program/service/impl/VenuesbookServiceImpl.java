@@ -57,6 +57,8 @@ public class VenuesbookServiceImpl extends ServiceImpl<VenuesbookMapper, Venuesb
         venuesbook.setBooktime(bookTime);
         if (BookTypeEnum.ACTIVITY == bookTypeEnum)  {
             venuesbook.setActivityTid(sceneId);
+        } else if (BookTypeEnum.VENUES == bookTypeEnum) {
+            venuesbook.setVenuesTid(sceneId);
         }
 
         wrapper.in("state", StateEnum.ENABLE.getState(), StateEnum.AUDITING.getState());
