@@ -112,7 +112,7 @@ public class VenuesServiceImpl extends ServiceImpl<VenuesMapper, Venues> impleme
      * @param tid
      * @return
      */
-    public boolean addBooked(String tid) {
+    public boolean updateBookState(String tid) {
         QueryWrapper<Venues> wrapper = new QueryWrapper();
         wrapper.eq("TID", tid);
         wrapper.eq("state", StateEnum.ENABLE.getState());
@@ -143,7 +143,7 @@ public class VenuesServiceImpl extends ServiceImpl<VenuesMapper, Venues> impleme
     @Transactional
     private Result addBookRecord(VenuesBookQuery venuesBookQuery, Venues venues) {
         // 只有更新成功才能继续
-        if (!addBooked(venues.getTid())) {
+        if (!updateBookState(venues.getTid())) {
             log.error("update venues state failed, tid={}, phone={}, state={}",
                     venuesBookQuery.getTid(), venuesBookQuery.getMobile(), venues.getState());
             return Result.error(ReturnCodeEnum.FAILED, "预约失败");
