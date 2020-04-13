@@ -2,7 +2,7 @@ package com.hk.culture.mini.program.common.constant;
 
 public enum ReturnCodeEnum {
     SUCCESS(1001, "success"),
-    FAILED(1002, "faield"),
+    FAILED(1002, "服务器异常"),
     PARAM_ERROR(1003, "param missing"),
     STATE_ERROR(1004, "state error"),
     OVER_LIMIT(1005, "times over limit"),
