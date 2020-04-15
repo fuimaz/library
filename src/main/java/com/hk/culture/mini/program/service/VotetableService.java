@@ -1,7 +1,9 @@
 package com.hk.culture.mini.program.service;
 
-import com.hk.culture.mini.program.entity.Votetable;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.hk.culture.mini.program.dto.Result;
+import com.hk.culture.mini.program.dto.query.VoteQuery;
+import com.hk.culture.mini.program.entity.Votetable;
 
 /**
  * <p>
@@ -13,4 +15,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface VotetableService extends IService<Votetable> {
 
+    Result vote(VoteQuery voteQuery);
 }
