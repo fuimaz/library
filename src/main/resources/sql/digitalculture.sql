@@ -568,4 +568,47 @@ CREATE TABLE `votetable`  (
   PRIMARY KEY (`TID`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
+-- ----------------------------
+-- Table structure for like
+-- ----------------------------
+CREATE TABLE `like` (
+  `TID` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `type` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '点赞的类型',
+  `targetTid` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '点赞内容的Tid',
+  `memberTid` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '点赞的会员id',
+  `createTime` datetime NOT NULL COMMENT '创建时间',
+  `updateTime` datetime NOT NULL COMMENT '更新时间',
+  PRIMARY KEY (`TID`),
+  UNIQUE KEY `unique_mTid_lTid` (`memberTid`,`targetTid`) USING BTREE COMMENT '会员Tid与点赞内容组成唯一索引'
+) ENGINE=InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Table structure for myCollection
+-- ----------------------------
+CREATE TABLE `myCollection` (
+  `TID` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `type` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '收藏的类型',
+  `targetTid` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '收藏内容的Tid',
+  `memberTid` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '收藏的会员id',
+  `createTime` datetime NOT NULL COMMENT '创建时间',
+  `updateTime` datetime NOT NULL COMMENT '更新时间',
+  PRIMARY KEY (`TID`),
+  UNIQUE KEY `unique_mTid_lTid` (`memberTid`,`targetTid`) USING BTREE COMMENT '会员Tid与收藏内容组成唯一索引'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Table structure for news
+-- ----------------------------
+CREATE TABLE `news` (
+  `TID` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '文章标题',
+  `content` text CHARACTER SET utf8mb4 NOT NULL COMMENT '内容',
+  `createTime` datetime NOT NULL COMMENT '创建时间',
+  `brief` text COMMENT CHARACTER SET utf8mb4  '简介',
+  `type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '类型',
+  `backgroundImg` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '背景图',
+  `show` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '是否展示',
+  PRIMARY KEY (`TID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='新闻资讯表';
+
 SET FOREIGN_KEY_CHECKS = 1;

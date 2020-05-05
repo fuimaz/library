@@ -7,6 +7,7 @@ public enum ReturnCodeEnum {
     STATE_ERROR(1004, "state error"),
     OVER_LIMIT(1005, "times over limit"),
     RECORD_EXISTS(1006, "record exists, don't repeat submit"),
+    RECORD_NOT_EXISTS(1007, "record not exists"),
     ;
 
     private String msg;
