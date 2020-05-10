@@ -24,5 +24,5 @@ public interface ActivityService extends IService<Activity> {
 
     Result<Boolean> book(ActivityBookQuery activityBookQuery);
 
-    Map<String, List<Activity>> listByDate(PagesQuery<Long> pagesQuery);
+    Map<String, List<Activity>> listByDate(Long time);
 }

@@ -62,6 +62,15 @@ public class ActivityController {
         return Result.success(activityVOIPage);
     }
 
+    @GetMapping("/listByMonth")
+    public Result listByMonth(Long time) {
+        if (time == null) {
+            time = System.currentTimeMillis();
+        }
+
+        return Result.success(activityService.listByDate(time));
+    }
+
 
     @PostMapping("/book")
     public Result book(@RequestBody ActivityBookQuery activityBookQuery) {
@@ -70,12 +79,6 @@ public class ActivityController {
         }
 
         return activityService.book(activityBookQuery);
-    }
-
-    @RequestMapping("/hello")
-    public Object hello() {
-
-        return "one";
     }
 }
 

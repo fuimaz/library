@@ -34,7 +34,7 @@ public class VenuesController {
 
 
     @PostMapping("/list")
-    public Result<Page<VenuesVO>> list(@RequestBody PagesQuery pagesQuery) {
+    public Result<Page<VenuesVO>> list(@RequestBody PagesQuery<VenuesVO> pagesQuery) {
         if (pagesQuery == null) {
             pagesQuery = new PagesQuery<>();
         }

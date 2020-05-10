@@ -25,7 +25,7 @@ public class LikeController {
     private LikeService likeService;
 
 
-    @PostMapping("/like")
+    @PostMapping("/add")
     public Result<Boolean> like(@NonNull @RequestParam(value = "tid") String tid,
                                 @NonNull @RequestParam(value = "type") String type,
                                 @NonNull @RequestParam(value = "memberTid") String memberTid) {

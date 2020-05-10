@@ -54,12 +54,6 @@ public class ActivityBookQuery implements Serializable {
     private String way;
 
     /**
-     * 预约人
-     */
-    @NonNull
-    private String responsible;
-
-    /**
      * 预约时间
      */
     @NonNull

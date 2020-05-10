@@ -79,13 +79,13 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
 
     /**
      * 查询指定月份内的全部活动信息
-     * @param pagesQuery
+     * @param time
      * @return
      */
     @Override
-    public Map<String, List<Activity>> listByDate(PagesQuery<Long> pagesQuery) {
-        Long monthStartTime = CalenderUtils.getMonthStartTime(pagesQuery.getData(), "GMT+8:00");
-        Long monthEndTime = CalenderUtils.getMonthEndTime(pagesQuery.getData(), "GMT+8:00");
+    public Map<String, List<Activity>> listByDate(Long time) {
+        Long monthStartTime = CalenderUtils.getMonthStartTime(time, "GMT+8:00");
+        Long monthEndTime = CalenderUtils.getMonthEndTime(time, "GMT+8:00");
         QueryWrapper<Activity> wrapper = new QueryWrapper();
         wrapper
                 .select("TID", "stratTime", "activityName")
@@ -93,7 +93,6 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
                 .le("stratTime", LocalDateTime.ofEpochSecond(monthEndTime, 0, ZoneOffset.ofHours(8)));
 
         wrapper.eq("state", StateEnum.ENABLE.getState());
-
 
         List<Activity> activityIPage = getBaseMapper().selectList(wrapper);
         if (CollectionUtils.isEmpty(activityIPage)) {
@@ -148,7 +147,7 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
     }
 
     @Transactional
-    private Result addBookRecord(ActivityBookQuery activityBookQuery, Activity activity) {
+    protected Result addBookRecord(ActivityBookQuery activityBookQuery, Activity activity) {
         // 只有更新成功才能继续，避免并发问题
         if (!addBooked(activity.getTid(), activity.getBooked())) {
             log.error("update activity book record failed, tid={}, phone={}, booked={}",
@@ -158,7 +157,7 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
 
         Venuesbook venuesbook = new Venuesbook();
         venuesbook.setResponsiblePhone(activityBookQuery.getMobile());
-        venuesbook.setResponsible(activityBookQuery.getResponsible());
+        venuesbook.setResponsible(activityBookQuery.getName());
         venuesbook.setActivityName(activity.getActivityName());
         venuesbook.setActivityTid(activity.getTid());
         venuesbook.setVenuesTid("");

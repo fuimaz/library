@@ -6,7 +6,6 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hk.culture.mini.program.common.constant.ReturnCodeEnum;
 import com.hk.culture.mini.program.dto.Result;
 import com.hk.culture.mini.program.dto.query.PagesQuery;
-import com.hk.culture.mini.program.dto.vo.ActivityVO;
 import com.hk.culture.mini.program.entity.Onlineshow;
 import com.hk.culture.mini.program.service.OnlineshowService;
 import org.apache.commons.collections.CollectionUtils;
@@ -43,7 +42,7 @@ public class OnlineshowController {
     }
 
     @PostMapping("/list")
-    public Result<Page<ActivityVO>> list(@RequestBody PagesQuery<Onlineshow> pagesQuery) {
+    public Result<Page<Onlineshow>> list(@RequestBody PagesQuery<Onlineshow> pagesQuery) {
         if (pagesQuery == null) {
             pagesQuery = new PagesQuery<>();
         }

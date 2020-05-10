@@ -20,7 +20,7 @@ public class VenuesBookQuery implements Serializable {
     private static final long serialVersionUID=1L;
 
     /**
-     * 预约活动id
+     * 预约场馆id
      */
     @NonNull
     private String tid;
@@ -49,11 +49,6 @@ public class VenuesBookQuery implements Serializable {
     @NonNull
     private String way;
 
-    /**
-     * 预约人
-     */
-    @NonNull
-    private String responsible;
 
     /**
      * 预约时间
