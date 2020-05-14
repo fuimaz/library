@@ -83,6 +83,11 @@ public class Site implements Serializable {
     private String show;
 
     /**
+     * 排序
+     */
+    private int order;
+
+    /**
      * 创建时间
      */
     @TableField("createTime")

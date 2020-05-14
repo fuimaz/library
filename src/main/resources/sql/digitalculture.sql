@@ -630,6 +630,7 @@ CREATE TABLE `site` (
   `type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '类型',
   `img` varchar(2048) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '背景图',
   `show` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '是否展示',
+  `sort` int(10) unsigned zerofill NOT NULL COMMENT '排序',
   `createTime` datetime NOT NULL COMMENT '创建时间',
   `updateTime` datetime NOT NULL COMMENT '更新时间',
   PRIMARY KEY (`TID`)

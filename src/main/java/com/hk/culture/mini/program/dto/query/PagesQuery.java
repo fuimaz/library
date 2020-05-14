@@ -17,6 +17,9 @@ public class PagesQuery<T> implements Serializable {
 
     private static final long serialVersionUID=1L;
 
+    private boolean orderByDesc = true;
+    private String orderByType;
+
     private T data;
 
     private int current = 1;
