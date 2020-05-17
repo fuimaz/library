@@ -1,9 +1,6 @@
-package com.hk.culture.mini.program.entity;
+package com.hk.culture.mini.program.dto.vo;
 
-import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -23,13 +20,19 @@ import java.time.LocalDateTime;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("site")
-public class Site implements Serializable {
+public class RouteSiteVO implements Serializable {
 
     private static final long serialVersionUID=1L;
 
-    @TableId(value = "TID", type = IdType.UUID)
+    /**
+     * 标注点tid
+     */
     private String tid;
+
+    /**
+     * 关联记录tid
+     */
+    private String relateTid;
 
     /**
      * 标注点名
@@ -83,7 +86,7 @@ public class Site implements Serializable {
     private String show;
 
     /**
-     * 排序, 竞价搜索
+     * 排序, 路线图中排序
      */
     private int order;
 

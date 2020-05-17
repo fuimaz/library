@@ -664,6 +664,7 @@ CREATE TABLE `route_relate` (
   `TID` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `routeTid` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '路线名',
   `siteTid` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '描述',
+  `order` int(10) NOT NULL COMMENT '顺序',
   `createTime` datetime NOT NULL COMMENT '创建时间',
   `updateTime` datetime NOT NULL COMMENT '更新时间',
   PRIMARY KEY (`TID`),

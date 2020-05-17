@@ -11,6 +11,7 @@ import com.hk.culture.mini.program.dto.query.PagesQuery;
 import com.hk.culture.mini.program.entity.Onlineshow;
 import com.hk.culture.mini.program.mapping.OnlineshowMapper;
 import com.hk.culture.mini.program.service.OnlineshowService;
+import lombok.NonNull;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -36,7 +37,7 @@ public class OnlineshowServiceImpl extends ServiceImpl<OnlineshowMapper, Onlines
      * @return
      */
     @Override
-    public Result getByTid(String tid) {
+    public Result getByTid(@NonNull String tid) {
         Onlineshow onlineshow = getBaseMapper().selectById(tid);
 
         if (onlineshow == null) {

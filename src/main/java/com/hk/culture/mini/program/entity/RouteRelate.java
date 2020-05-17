@@ -42,6 +42,13 @@ public class RouteRelate implements Serializable {
     @TableField("siteTid")
     private String siteTid;
 
+
+    /**
+     * 顺序
+     */
+    @TableField("order")
+    private int order;
+
     /**
      * 创建时间
      */
