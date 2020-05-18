@@ -110,7 +110,7 @@ public class RouteServiceImpl extends ServiceImpl<RouteMapper, Route> implements
 
         // 默认只搜可见的
         if (StringUtils.isEmpty(route.getShow())) {
-            wrapper.eq("show", StateEnum.ENABLE.getState());
+            wrapper.eq("`show`", StateEnum.ENABLE.getState());
         }
 
         if (pagesQuery.isOrderByDesc()) {
@@ -189,7 +189,7 @@ public class RouteServiceImpl extends ServiceImpl<RouteMapper, Route> implements
 
         // 插入关联坐标点信息
         for (RouteSiteVO site : routeVO.getSiteList()) {
-            saveRouteRelate(routeVO.getTid(), site);
+            saveRouteRelate(route.getTid(), site);
         }
 
 

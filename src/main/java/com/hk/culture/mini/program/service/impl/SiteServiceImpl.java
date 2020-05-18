@@ -43,10 +43,10 @@ public class SiteServiceImpl extends ServiceImpl<SiteMapper, Site> implements Si
 
         // 默认只搜可见的
         if (StringUtils.isEmpty(site.getShow())) {
-            wrapper.eq("show", StateEnum.ENABLE.getState());
+            wrapper.eq("`show`", StateEnum.ENABLE.getState());
         }
 
-        wrapper.orderByDesc("createTime", "sort");
+        wrapper.orderByDesc("`order`");
 
         Page<Site> page = new Page<>(pagesQuery.getCurrent(), pagesQuery.getPageSize());
 

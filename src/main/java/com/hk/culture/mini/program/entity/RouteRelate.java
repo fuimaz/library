@@ -46,7 +46,7 @@ public class RouteRelate implements Serializable {
     /**
      * 顺序
      */
-    @TableField("order")
+    @TableField("`order`")
     private int order;
 
     /**

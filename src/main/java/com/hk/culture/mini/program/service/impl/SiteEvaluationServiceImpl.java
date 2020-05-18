@@ -43,7 +43,7 @@ public class SiteEvaluationServiceImpl extends ServiceImpl<SiteEvaluationMapper,
 
         // 默认只搜可见的
         if (StringUtils.isEmpty(siteEvaluation.getShow())) {
-            wrapper.eq("show", StateEnum.ENABLE.getState());
+            wrapper.eq("`show`", StateEnum.ENABLE.getState());
         }
 
         if (pagesQuery.isOrderByDesc()) {

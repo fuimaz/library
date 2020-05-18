@@ -37,7 +37,7 @@ public class RouteRelateServiceImpl extends ServiceImpl<RouteRelateMapper, Route
 
         wrapper.eq("routeTid", routeTid);
 
-        wrapper.orderByAsc("order");
+        wrapper.orderByAsc("`order`");
 
         List<RouteRelate> routeRelates = getBaseMapper().selectList(wrapper);
 

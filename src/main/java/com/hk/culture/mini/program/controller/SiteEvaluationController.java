@@ -12,7 +12,6 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -23,7 +22,7 @@ import org.springframework.web.bind.annotation.*;
  * @author 
  * @since 2020-05-12
  */
-@Controller
+@RestController
 @RequestMapping("/siteEvaluation")
 public class SiteEvaluationController {
 
@@ -61,7 +60,7 @@ public class SiteEvaluationController {
     }
 
     @PostMapping("/add")
-    public Result<Boolean> like(@RequestBody SiteEvaluation site) {
+    public Result<Boolean> add(@RequestBody SiteEvaluation site) {
         if (site == null) {
             return Result.error(ReturnCodeEnum.PARAM_ERROR);
         }
@@ -70,7 +69,7 @@ public class SiteEvaluationController {
     }
 
     @PostMapping("/remove")
-    public Result cancel(@NonNull @RequestParam(value = "tid") String tid,
+    public Result remove(@NonNull @RequestParam(value = "tid") String tid,
                          @NonNull @RequestParam(value = "memberTid") String memberTid) {
 
         return Result.success(siteEvaluationService.deleteByTid(tid, memberTid));

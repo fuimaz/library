@@ -46,14 +46,14 @@ public class NewsServiceImpl extends ServiceImpl<NewsMapper, News> implements Ne
     @Override
     public IPage<News> listByCondition(PagesQuery<NewsQuery> pagesQuery) {
         QueryWrapper<News> wrapper = new QueryWrapper();
-        wrapper.select("TID", "title", "brief", "show", "createTime", "type", "backgroundImg");
+        wrapper.select("TID", "title", "brief", "`show`", "createTime", "type", "backgroundImg");
         NewsQuery queryData = pagesQuery.getData();
         if (StringUtils.isNotEmpty(queryData.getKeyword())) {
             wrapper.like("title", queryData.getKeyword() + "%");
             wrapper.or().like("brief", queryData.getKeyword() + "%");
         }
 
-        wrapper.eq("show", StateEnum.ENABLE.getState());
+        wrapper.eq("`show`", StateEnum.ENABLE.getState());
         wrapper.orderByDesc("createTime");
 
         Page<News> page = new Page<>(pagesQuery.getCurrent(), pagesQuery.getPageSize());

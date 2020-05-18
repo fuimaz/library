@@ -80,11 +80,13 @@ public class Site implements Serializable {
     /**
      * 是否展示
      */
+    @TableField("`show`")
     private String show;
 
     /**
      * 排序, 竞价搜索
      */
+    @TableField("`order`")
     private int order;
 
     /**

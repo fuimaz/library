@@ -65,6 +65,7 @@ public class News implements Serializable {
     /**
      * 是否展示
      */
+    @TableField("`show`")
     private String show;
 
 }
