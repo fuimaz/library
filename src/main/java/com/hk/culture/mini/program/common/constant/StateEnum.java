@@ -10,13 +10,19 @@ public enum StateEnum {
     ;
 
     private String state;
+    private int stateCode;
 
     StateEnum(String state) {
         this.state = state;
+        this.stateCode = Integer.valueOf(state);
     }
 
     public String getState() {
         return state;
+    }
+
+    public int getStateCode() {
+        return stateCode;
     }
 
     public static StateEnum getValue(String state) {
