@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hk.culture.mini.program.mapping.SiteMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.hk.culture.mini.program.entity.Site">
+        <id column="TID" property="tid" />
+        <result column="name" property="name" />
+        <result column="detail" property="detail" />
+        <result column="brief" property="brief" />
+        <result column="auditing" property="auditing" />
+        <result column="lng" property="lng" />
+        <result column="lat" property="lat" />
+        <result column="authMan" property="authMan" />
+        <result column="type" property="type" />
+        <result column="img" property="img" />
+        <result column="show" property="show" />
+        <result column="createTime" property="createTime" />
+        <result column="updateTime" property="updateTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        TID, name, detail, brief, auditing, lng, lat, authMan, type, img, show, createTime, updateTime
+    </sql>
+
+</mapper>

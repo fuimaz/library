@@ -13,17 +13,17 @@ import java.time.LocalDateTime;
 
 /**
  * <p>
- * 新闻资讯表
+ * 路线标注点关联表
  * </p>
  *
  * @author 
- * @since 2020-05-02
+ * @since 2020-05-12
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("news")
-public class News implements Serializable {
+@TableName("route_relate")
+public class RouteRelate implements Serializable {
 
     private static final long serialVersionUID=1L;
 
@@ -31,14 +31,23 @@ public class News implements Serializable {
     private String tid;
 
     /**
-     * 文章标题
+     * 路线名
      */
-    private String title;
+    @TableField("routeTid")
+    private String routeTid;
 
     /**
-     * 内容
+     * 描述
      */
-    private String content;
+    @TableField("siteTid")
+    private String siteTid;
+
+
+    /**
+     * 顺序
+     */
+    @TableField("`order`")
+    private int order;
 
     /**
      * 创建时间
@@ -47,25 +56,10 @@ public class News implements Serializable {
     private LocalDateTime createTime;
 
     /**
-     * 简介
+     * 更新时间
      */
-    private String brief;
+    @TableField("updateTime")
+    private LocalDateTime updateTime;
 
-    /**
-     * 类型
-     */
-    private String type;
-
-    /**
-     * 背景图
-     */
-    @TableField("backgroundImg")
-    private String backgroundImg;
-
-    /**
-     * 是否展示
-     */
-    @TableField("`show`")
-    private String show;
 
 }

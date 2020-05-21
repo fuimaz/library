@@ -556,6 +556,7 @@ CREATE TABLE `votetable`  (
 -- ----------------------------
 -- Table structure for like
 -- ----------------------------
+DROP TABLE IF EXISTS `like`;
 CREATE TABLE `like` (
   `TID` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `type` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '点赞的类型',
@@ -570,6 +571,7 @@ CREATE TABLE `like` (
 -- ----------------------------
 -- Table structure for myCollection
 -- ----------------------------
+DROP TABLE IF EXISTS `myCollection`;
 CREATE TABLE `myCollection` (
   `TID` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `type` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '收藏的类型',
@@ -579,22 +581,99 @@ CREATE TABLE `myCollection` (
   `updateTime` datetime NOT NULL COMMENT '更新时间',
   PRIMARY KEY (`TID`),
   UNIQUE KEY `unique_mTid_lTid` (`memberTid`,`targetTid`) USING BTREE COMMENT '会员Tid与收藏内容组成唯一索引'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Table structure for news
 -- ----------------------------
+DROP TABLE IF EXISTS `news`;
 CREATE TABLE `news` (
   `TID` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '文章标题',
   `content` text CHARACTER SET utf8mb4 NOT NULL COMMENT '内容',
   `createTime` datetime NOT NULL COMMENT '创建时间',
-  `brief` text COMMENT CHARACTER SET utf8mb4  '简介',
+  `brief` text CHARACTER SET utf8mb4 COMMENT '简介',
   `type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '类型',
   `backgroundImg` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '背景图',
   `show` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '是否展示',
   PRIMARY KEY (`TID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='新闻资讯表';
+) ENGINE=InnoDB DEFAULT CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact COMMENT='新闻资讯表';
+
+-- ----------------------------
+-- Table structure for site
+-- ----------------------------
+DROP TABLE IF EXISTS `site`;
+CREATE TABLE `site` (
+  `TID` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '标注点名',
+  `detail` text CHARACTER SET utf8mb4 NOT NULL COMMENT '详情',
+  `brief` text CHARACTER SET utf8mb4 COMMENT '简介',
+  `auditing` tinyint(1) NOT NULL COMMENT '审核状态',
+  `lng` decimal(10,6) NOT NULL COMMENT '经度',
+  `lat` decimal(10,6) NOT NULL COMMENT '纬度',
+  `authMan` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '审核人',
+  `type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '类型',
+  `img` varchar(2048) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '背景图',
+  `show` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '是否展示',
+  `sort` int(10) unsigned zerofill NOT NULL COMMENT '排序',
+  `createTime` datetime NOT NULL COMMENT '创建时间',
+  `updateTime` datetime NOT NULL COMMENT '更新时间',
+  PRIMARY KEY (`TID`)
+) ENGINE=InnoDB DEFAULT CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact COMMENT='标注点表';
+
+
+-- ----------------------------
+-- Table structure for route
+-- ----------------------------
+DROP TABLE IF EXISTS `route`;
+CREATE TABLE `route` (
+  `TID` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '路线名',
+  `detail` text CHARACTER SET utf8mb4 NOT NULL COMMENT '描述',
+  `brief` text CHARACTER SET utf8mb4 COMMENT '简介',
+  `auditing` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '审核状态',
+  `authMan` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '审核人',
+  `img` varchar(2048) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '背景图',
+  `show` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '是否展示',
+  `createTime` datetime NOT NULL COMMENT '创建时间',
+  `updateTime` datetime NOT NULL COMMENT '更新时间',
+  PRIMARY KEY (`TID`)
+) ENGINE=InnoDB DEFAULT CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact COMMENT='路线图表';
+
+
+-- ----------------------------
+-- Table structure for route_relate
+-- ----------------------------
+DROP TABLE IF EXISTS `route_relate`;
+CREATE TABLE `route_relate` (
+  `TID` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `routeTid` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '路线名',
+  `siteTid` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '描述',
+  `order` int(10) NOT NULL COMMENT '顺序',
+  `createTime` datetime NOT NULL COMMENT '创建时间',
+  `updateTime` datetime NOT NULL COMMENT '更新时间',
+  PRIMARY KEY (`TID`),
+  UNIQUE KEY `unique_rTid_sTid` (`routeTid`,`siteTid`) USING BTREE COMMENT '路线id与标注点唯一'
+) ENGINE=InnoDB DEFAULT CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact COMMENT='路线标注点关联表';
+
+
+-- ----------------------------
+-- Table structure for site_evaluation
+-- ----------------------------
+DROP TABLE IF EXISTS `site_evaluation`;
+CREATE TABLE `site_evaluation` (
+  `TID` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `siteTid` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '描述',
+  `memberTid` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '会员id',
+  `auditing` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '审核状态',
+  `authMan` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '审核人',
+  `content` text CHARACTER SET utf8mb4 NOT NULL COMMENT '内容',
+  `show` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '是否展示',
+  `createTime` datetime NOT NULL COMMENT '创建时间',
+  `updateTime` datetime NOT NULL COMMENT '更新时间',
+  PRIMARY KEY (`TID`),
+  UNIQUE KEY `unique_rTid_sTid` (`siteTid`, `memberTid`) USING BTREE COMMENT '会员id与标注点唯一'
+) ENGINE=InnoDB DEFAULT CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact COMMENT='标注点评价表';
 
 -- ----------------------------
 -- Table structure for phone_message

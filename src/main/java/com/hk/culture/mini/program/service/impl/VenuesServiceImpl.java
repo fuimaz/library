@@ -151,7 +151,6 @@ public class VenuesServiceImpl extends ServiceImpl<VenuesMapper, Venues> impleme
 
         Venuesbook venuesbook = new Venuesbook();
         venuesbook.setResponsiblePhone(venuesBookQuery.getMobile());
-        venuesbook.setResponsible(venuesBookQuery.getResponsible());
         venuesbook.setActivityName("");
         venuesbook.setActivityTid("");
         venuesbook.setVenuesName(venues.getName());

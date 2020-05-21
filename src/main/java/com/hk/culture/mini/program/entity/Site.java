@@ -9,21 +9,22 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 /**
  * <p>
- * 新闻资讯表
+ * 标注点表
  * </p>
  *
  * @author 
- * @since 2020-05-02
+ * @since 2020-05-12
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("news")
-public class News implements Serializable {
+@TableName("site")
+public class Site implements Serializable {
 
     private static final long serialVersionUID=1L;
 
@@ -31,25 +32,40 @@ public class News implements Serializable {
     private String tid;
 
     /**
-     * 文章标题
+     * 标注点名
      */
-    private String title;
+    private String name;
 
     /**
-     * 内容
+     * 详情
      */
-    private String content;
-
-    /**
-     * 创建时间
-     */
-    @TableField("createTime")
-    private LocalDateTime createTime;
+    private String detail;
 
     /**
      * 简介
      */
     private String brief;
+
+    /**
+     * 审核状态
+     */
+    private Boolean auditing;
+
+    /**
+     * 经度
+     */
+    private BigDecimal lng;
+
+    /**
+     * 纬度
+     */
+    private BigDecimal lat;
+
+    /**
+     * 审核人
+     */
+    @TableField("authMan")
+    private String authMan;
 
     /**
      * 类型
@@ -59,13 +75,31 @@ public class News implements Serializable {
     /**
      * 背景图
      */
-    @TableField("backgroundImg")
-    private String backgroundImg;
+    private String img;
 
     /**
      * 是否展示
      */
     @TableField("`show`")
     private String show;
+
+    /**
+     * 排序, 竞价搜索
+     */
+    @TableField("`order`")
+    private int order;
+
+    /**
+     * 创建时间
+     */
+    @TableField("createTime")
+    private LocalDateTime createTime;
+
+    /**
+     * 更新时间
+     */
+    @TableField("updateTime")
+    private LocalDateTime updateTime;
+
 
 }

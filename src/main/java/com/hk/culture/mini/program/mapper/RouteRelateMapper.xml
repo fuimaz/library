@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hk.culture.mini.program.mapping.RouteRelateMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.hk.culture.mini.program.entity.RouteRelate">
+        <id column="TID" property="tid" />
+        <result column="routeTid" property="routeTid" />
+        <result column="siteTid" property="siteTid" />
+        <result column="createTime" property="createTime" />
+        <result column="updateTime" property="updateTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        TID, routeTid, siteTid, createTime, updateTime
+    </sql>
+
+</mapper>

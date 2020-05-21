@@ -27,6 +27,20 @@ public class Result<T> {
         return result;
     }
 
+    public static Result result(boolean r){
+        Result<Boolean> result = new Result(ReturnCodeEnum.SUCCESS);
+        if (r) {
+            result.setCode(ReturnCodeEnum.SUCCESS.getCode());
+            result.setMsg(ReturnCodeEnum.SUCCESS.getMsg());
+        } else {
+            result.setCode(ReturnCodeEnum.FAILED.getCode());
+            result.setMsg(ReturnCodeEnum.FAILED.getMsg());
+        }
+
+        result.setData(r);
+        return result;
+    }
+
     public static <T> Result error(int code, String msg){
         Result<T> result = new Result<>(code, msg, null);
         return result;
