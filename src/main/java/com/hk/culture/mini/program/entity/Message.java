@@ -65,6 +65,12 @@ public class Message implements Serializable {
     /**
      * 创建时间
      */
+    @TableField("notifyTime")
+    private LocalDateTime notifyTime;
+
+    /**
+     * 创建时间
+     */
     @TableField("createTime")
     private LocalDateTime createTime;
 

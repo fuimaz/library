@@ -118,7 +118,7 @@ public class VenuesServiceImpl extends ServiceImpl<VenuesMapper, Venues> impleme
         wrapper.eq("state", StateEnum.ENABLE.getState());
 
         Venues venues = new Venues();
-        venues.setState(StateEnum.Booked.getState());
+        venues.setState(StateEnum.BOOKED.getState());
         return getBaseMapper().update(venues, wrapper) == 1;
     }
 
@@ -141,7 +141,7 @@ public class VenuesServiceImpl extends ServiceImpl<VenuesMapper, Venues> impleme
     }
 
     @Transactional
-    private Result addBookRecord(VenuesBookQuery venuesBookQuery, Venues venues) {
+    public Result addBookRecord(VenuesBookQuery venuesBookQuery, Venues venues) {
         // 只有更新成功才能继续
         if (!updateBookState(venues.getTid())) {
             log.error("update venues state failed, tid={}, phone={}, state={}",

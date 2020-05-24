@@ -2,9 +2,11 @@ package com.hk.culture.mini.program.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.hk.culture.mini.program.common.constant.MsgTypeEnum;
 import com.hk.culture.mini.program.dto.query.PagesQuery;
 import com.hk.culture.mini.program.entity.Message;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -17,10 +19,15 @@ import java.util.List;
  */
 public interface MessageService extends IService<Message> {
 
+    List<Message> listWaitingMsg();
+
     List<Message> listByMemberId(String memberTid);
 
-    IPage<Message> listByCondition(PagesQuery<String> pagesQuery);
+    IPage<Message> listByCondition(PagesQuery<Message> pagesQuery);
 
-    boolean add(String type, String relateTid, String memberTid, String content, String phone);
+    boolean add(MsgTypeEnum type, String relateTid, String memberTid, String content, String phone);
+
+    boolean addTimingMsg(MsgTypeEnum type, String relateTid, String memberTid, String content,
+                         String phone, LocalDateTime notifyTime);
 
 }

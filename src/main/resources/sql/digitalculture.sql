@@ -687,6 +687,7 @@ CREATE TABLE `message`  (
   `memberTid` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT NULL COMMENT '会员id',
   `phone` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '手机号',
   `state` int(10) NOT NULL COMMENT '状态',
+  `notifyTime` datetime DEFAULT NULL COMMENT '通知时间',
   `createTime` datetime NOT NULL COMMENT '创建时间',
   `updateTime` datetime NOT NULL COMMENT '更新时间',
   PRIMARY KEY (`TID`) USING BTREE,
