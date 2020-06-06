@@ -1,6 +1,7 @@
 package com.hk.culture.mini.program.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.hk.culture.mini.program.entity.Message;
 
 /**
  * <p>

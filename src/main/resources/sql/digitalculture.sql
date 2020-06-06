@@ -681,11 +681,11 @@ CREATE TABLE `site_evaluation` (
 DROP TABLE IF EXISTS `message`;
 CREATE TABLE `message`  (
   `TID` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `type` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT NULL COMMENT '类型',
+  `type` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '类型',
   `content` text CHARACTER SET utf8mb4 NOT NULL COMMENT '内容',
-  `relateTid` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT NULL COMMENT '需要发送消息的记录id',
-  `memberTid` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT NULL COMMENT '会员id',
-  `phone` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '手机号',
+  `relateTid` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '需要发送消息的记录id',
+  `memberTid` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '会员id',
+  `phone` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '手机号',
   `state` int(10) NOT NULL COMMENT '状态',
   `notifyTime` datetime DEFAULT NULL COMMENT '通知时间',
   `createTime` datetime NOT NULL COMMENT '创建时间',
