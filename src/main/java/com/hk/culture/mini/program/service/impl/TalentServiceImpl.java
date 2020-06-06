@@ -4,14 +4,18 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.hk.culture.mini.program.common.constant.ReturnCodeEnum;
+import com.hk.culture.mini.program.common.constant.StateEnum;
+import com.hk.culture.mini.program.dto.Result;
 import com.hk.culture.mini.program.dto.query.PagesQuery;
-import com.hk.culture.mini.program.dto.vo.VenuesVO;
 import com.hk.culture.mini.program.entity.Talent;
-import com.hk.culture.mini.program.entity.Venues;
 import com.hk.culture.mini.program.mapping.TalentMapper;
 import com.hk.culture.mini.program.service.TalentService;
-import org.apache.commons.lang.StringUtils;
+import lombok.NonNull;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -22,7 +26,25 @@ import org.springframework.stereotype.Service;
  * @since 2020-04-11
  */
 @Service
+@Slf4j
 public class TalentServiceImpl extends ServiceImpl<TalentMapper, Talent> implements TalentService {
+
+    /**
+     * 获取详情
+     * @param tid
+     * @return
+     */
+    @Override
+    public Result getByTid(@NonNull String tid) {
+        Talent talent = getBaseMapper().selectById(tid);
+
+        if (talent == null) {
+            return Result.error(ReturnCodeEnum.RECORD_NOT_EXISTS, "文艺人才不存在");
+        }
+
+        return Result.success(talent);
+    }
+
 
     /**
      * 条件查询，无条件则返回全部分页数据
@@ -33,15 +55,67 @@ public class TalentServiceImpl extends ServiceImpl<TalentMapper, Talent> impleme
     public IPage<Talent> listByCondition(PagesQuery<Talent> pagesQuery) {
         QueryWrapper<Talent> wrapper = new QueryWrapper();
 
-        wrapper.select("TID", "name");
         Talent talent = pagesQuery.getData();
         // todo 对人才按点赞数进行排名展示
-//        wrapper.orderByDesc("stratTime");
+        wrapper.orderByDesc("``order");
 
         Page<Talent> page = new Page<>(pagesQuery.getCurrent(), pagesQuery.getPageSize());
 
         IPage<Talent> talentIPage = getBaseMapper().selectPage(page, wrapper);
 
         return talentIPage;
+    }
+
+    /**
+     * 插入
+     *
+     * @param talent
+     * @return
+     */
+    @Override
+    public Result<Boolean> add(Talent talent) {
+        QueryWrapper<Talent> wrapper = new QueryWrapper();
+
+        wrapper.eq("idNo", talent.getIdNo());
+        Talent one = getBaseMapper().selectOne(wrapper);
+        if (one != null) {
+            return Result.error(ReturnCodeEnum.RECORD_EXISTS, "您已提交过");
+        }
+
+        talent.setUpdateTime(LocalDateTime.now());
+        talent.setCreateTime(LocalDateTime.now());
+        talent.setAuditing(StateEnum.DISABLE.getState());
+        talent.setState(StateEnum.DISABLE.getStateCode());
+
+        return Result.result(getBaseMapper().insert(talent) == 1);
+    }
+
+    /**
+     * 根据Tid更新
+     * @param talent
+     * @return
+     */
+    @Override
+    public Result<Boolean> updateByTid(Talent talent) {
+        talent.setUpdateTime(LocalDateTime.now());
+
+        // 不能修改
+        talent.setCreateTime(null);
+        talent.setIdNo(null);
+
+        return Result.result(getBaseMapper().updateById(talent) == 1);
+    }
+
+    /**
+     * 根据Tid删除
+     * @param tid
+     * @param tid
+     * @return
+     */
+    @Override
+    public Result<Boolean> deleteByTid(String tid, String operator) {
+
+        log.warn("{} delete tid={} record", operator);
+        return Result.result(getBaseMapper().deleteById(tid) == 1);
     }
 }
