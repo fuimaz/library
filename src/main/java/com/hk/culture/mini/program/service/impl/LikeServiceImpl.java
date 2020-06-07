@@ -37,6 +37,19 @@ public class LikeServiceImpl extends ServiceImpl<LikeMapper, Like> implements Li
     }
 
     /**
+     * 通过点赞对象查找点赞数
+     * @param targetTid
+     * @return
+     */
+    public int getCountByTargetId(String targetTid) {
+        QueryWrapper<Like> wrapper = new QueryWrapper();
+
+        wrapper.eq("targetTid", targetTid);
+
+        return getBaseMapper().selectCount(wrapper);
+    }
+
+    /**
      * 点赞
      * @param targetTid
      * @param memberTid

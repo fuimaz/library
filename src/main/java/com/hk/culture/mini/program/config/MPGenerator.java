@@ -37,7 +37,7 @@ public class MPGenerator {
         DataSourceConfig dsc = new DataSourceConfig();
         dsc.setDbType(DbType.MYSQL);
         dsc.setDriverName("com.mysql.cj.jdbc.Driver");
-        dsc.setUrl("jdbc:mysql://localhost:3306/test?characterEncoding=utf8&useSSL=false");
+        dsc.setUrl("jdbc:mysql://localhost:3306/digitalculture?characterEncoding=utf8&useSSL=false");
         dsc.setUsername("root");
         dsc.setPassword("test1234");
         mpg.setDataSource(dsc);

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hk.culture.mini.program.mapping.LiteraryTeamMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.hk.culture.mini.program.entity.LiteraryTeam">
+        <id column="TID" property="tid" />
+        <result column="applicant" property="applicant" />
+        <result column="companyType" property="companyType" />
+        <result column="capital" property="capital" />
+        <result column="authority" property="authority" />
+        <result column="bizScope" property="bizScope" />
+        <result column="regNo" property="regNo" />
+        <result column="member" property="member" />
+        <result column="representative" property="representative" />
+        <result column="repMobileNo" property="repMobileNo" />
+        <result column="repPhone" property="repPhone" />
+        <result column="repId" property="repId" />
+        <result column="leader" property="leader" />
+        <result column="leaderMobileNo" property="leaderMobileNo" />
+        <result column="leaderPhone" property="leaderPhone" />
+        <result column="leaderId" property="leaderId" />
+        <result column="zipCode" property="zipCode" />
+        <result column="residence" property="residence" />
+        <result column="faxPhone" property="faxPhone" />
+        <result column="bizAddr" property="bizAddr" />
+        <result column="bizZipCode" property="bizZipCode" />
+        <result column="bizFaxPhone" property="bizFaxPhone" />
+        <result column="remarks" property="remarks" />
+        <result column="auditing" property="auditing" />
+        <result column="img" property="img" />
+        <result column="createTime" property="createTime" />
+        <result column="updateTime" property="updateTime" />
+        <result column="state" property="state" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        TID, applicant, companyType, capital, authority, bizScope, regNo, member, representative, repMobileNo, repPhone, repId, leader, leaderMobileNo, leaderPhone, leaderId, zipCode, residence, faxPhone, bizAddr, bizZipCode, bizFaxPhone, remarks, auditing, img, createTime, updateTime, state
+    </sql>
+
+</mapper>

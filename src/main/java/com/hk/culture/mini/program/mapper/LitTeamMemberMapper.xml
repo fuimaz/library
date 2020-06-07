@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hk.culture.mini.program.mapping.LitTeamMemberMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.hk.culture.mini.program.entity.LitTeamMember">
+        <id column="TID" property="tid" />
+        <result column="teamTID" property="teamTID" />
+        <result column="name" property="name" />
+        <result column="sex" property="sex" />
+        <result column="major" property="major" />
+        <result column="idNo" property="idNo" />
+        <result column="degree" property="degree" />
+        <result column="remarks" property="remarks" />
+        <result column="auditing" property="auditing" />
+        <result column="img" property="img" />
+        <result column="idImg" property="idImg" />
+        <result column="abilityImg" property="abilityImg" />
+        <result column="createTime" property="createTime" />
+        <result column="updateTime" property="updateTime" />
+        <result column="state" property="state" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        TID, teamTID, name, sex, major, idNo, degree, remarks, auditing, img, idImg, abilityImg, createTime, updateTime, state
+    </sql>
+
+</mapper>

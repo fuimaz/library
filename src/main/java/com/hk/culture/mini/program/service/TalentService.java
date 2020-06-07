@@ -7,6 +7,8 @@ import com.hk.culture.mini.program.dto.query.PagesQuery;
 import com.hk.culture.mini.program.entity.Talent;
 import lombok.NonNull;
 
+import java.util.List;
+
 /**
  * <p>
  *  服务类
@@ -26,5 +28,7 @@ public interface TalentService extends IService<Talent> {
     Result<Boolean> updateByTid(Talent talent);
 
     Result<Boolean> deleteByTid(String tid, String operator);
+
+    List<Talent> listAllActive();
 
 }

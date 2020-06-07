@@ -15,6 +15,8 @@ public interface LikeService extends IService<Like> {
 
     Like getByTargetIdAndMemberId(String targetTid, String memberTid);
 
+    int getCountByTargetId(String targetTid);
+
     boolean like(String type, String targetTid, String memberTid);
 
     boolean cancel(String targetTid, String memberTid);

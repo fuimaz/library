@@ -16,6 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * <p>
@@ -56,7 +57,12 @@ public class TalentServiceImpl extends ServiceImpl<TalentMapper, Talent> impleme
         QueryWrapper<Talent> wrapper = new QueryWrapper();
 
         Talent talent = pagesQuery.getData();
-        // todo 对人才按点赞数进行排名展示
+
+        wrapper.eq("state", talent.getState());
+        wrapper.eq("auditing", talent.getAuditing());
+
+
+        // 对人才按点赞数进行排名展示
         wrapper.orderByDesc("``order");
 
         Page<Talent> page = new Page<>(pagesQuery.getCurrent(), pagesQuery.getPageSize());
@@ -104,6 +110,21 @@ public class TalentServiceImpl extends ServiceImpl<TalentMapper, Talent> impleme
         talent.setIdNo(null);
 
         return Result.result(getBaseMapper().updateById(talent) == 1);
+    }
+
+    /**
+     * 根据Tid更新
+     * @return
+     */
+    @Override
+    public List<Talent> listAllActive() {
+        QueryWrapper<Talent> wrapper = new QueryWrapper();
+        wrapper.eq("state", StateEnum.ENABLE.getStateCode());
+        wrapper.eq("auditing", StateEnum.ENABLE.getState());
+
+        List<Talent> talentList = getBaseMapper().selectList(wrapper);
+
+        return talentList;
     }
 
     /**

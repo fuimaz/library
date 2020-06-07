@@ -5,17 +5,19 @@
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.hk.culture.mini.program.entity.Message">
         <id column="TID" property="tid" />
-        <result column="module" property="module" />
-        <result column="function" property="function" />
-        <result column="detail" property="detail" />
-        <result column="remarks" property="remarks" />
+        <result column="type" property="type" />
+        <result column="content" property="content" />
+        <result column="relateTid" property="relateTid" />
+        <result column="memberTid" property="memberTid" />
         <result column="phone" property="phone" />
-        <result column="text" property="text" />
+        <result column="state" property="state" />
+        <result column="createTime" property="createTime" />
+        <result column="updateTime" property="updateTime" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        TID, module, function, detail, remarks, phone, text
+        TID, type, content, relateTid, memberTid, phone, state, createTime, updateTime
     </sql>
 
 </mapper>

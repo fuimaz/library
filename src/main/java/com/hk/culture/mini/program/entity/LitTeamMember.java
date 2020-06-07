@@ -1,19 +1,18 @@
 package com.hk.culture.mini.program.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import java.time.LocalDateTime;
+import com.baomidou.mybatisplus.annotation.TableField;
+import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
-import java.io.Serializable;
-import java.time.LocalDateTime;
-
 /**
  * <p>
- * 
+ * 文艺团队成员表
  * </p>
  *
  * @author 
@@ -22,16 +21,22 @@ import java.time.LocalDateTime;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("talent")
-public class Talent implements Serializable {
+@TableName("lit_team_member")
+public class LitTeamMember implements Serializable {
 
     private static final long serialVersionUID=1L;
 
     /**
-     * 文艺人才表
+     * id
      */
     @TableId(value = "TID", type = IdType.UUID)
     private String tid;
+
+    /**
+     * 团队id
+     */
+    @TableField("teamTID")
+    private String teamTID;
 
     /**
      * 姓名
@@ -44,68 +49,20 @@ public class Talent implements Serializable {
     private String sex;
 
     /**
+     * 专业
+     */
+    private String major;
+
+    /**
      * 身份证号
      */
     @TableField("idNo")
     private String idNo;
 
     /**
-     * 生日
-     */
-    private String birth;
-
-    /**
-     * 毕业院校
-     */
-    private String school;
-
-    /**
-     * 学历
+     * 学历或职称
      */
     private String degree;
-
-    /**
-     * 地址
-     */
-    private String address;
-
-    /**
-     * 工作单位
-     */
-    @TableField("workUnit")
-    private String workUnit;
-
-    /**
-     * 手机号
-     */
-    @TableField("phoneNo")
-    private String phoneNo;
-
-    /**
-     * 座机号
-     */
-    @TableField("mobileNo")
-    private String mobileNo;
-
-    /**
-     * 邮箱
-     */
-    private String email;
-
-    /**
-     * qq号
-     */
-    private String qq;
-
-    /**
-     * 爱好特长
-     */
-    private String interest;
-
-    /**
-     * 工艺经历
-     */
-    private String experience;
 
     /**
      * 备注
@@ -118,11 +75,6 @@ public class Talent implements Serializable {
     private String auditing;
 
     /**
-     * 顺序
-     */
-    private Integer order;
-
-    /**
      * 人才照片
      */
     private String img;
@@ -132,6 +84,12 @@ public class Talent implements Serializable {
      */
     @TableField("idImg")
     private String idImg;
+
+    /**
+     * 能力证明照片
+     */
+    @TableField("abilityImg")
+    private String abilityImg;
 
     /**
      * 创建时间
