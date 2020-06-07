@@ -46,12 +46,7 @@ public class MsgSenderCronTask {
                 log.error("", e);
             }
         }
-
-
     }
-
-
-
 
     private boolean updateMsg(Message message, StateEnum update) {
         // 状态一致时才更新
@@ -60,7 +55,7 @@ public class MsgSenderCronTask {
         wrapper.eq("state", message.getState());
 
         Message updateMsg = new Message();
-        message.setState(update.getStateCode());
+        updateMsg.setState(update.getStateCode());
         return messageService.getBaseMapper().update(updateMsg, wrapper) == 1;
     }
 }
