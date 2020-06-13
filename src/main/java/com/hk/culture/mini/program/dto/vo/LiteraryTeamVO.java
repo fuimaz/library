@@ -1,15 +1,16 @@
-package com.hk.culture.mini.program.entity;
+package com.hk.culture.mini.program.dto.vo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.hk.culture.mini.program.entity.LitTeamMember;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * <p>
@@ -22,8 +23,7 @@ import java.time.LocalDateTime;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("literary_team")
-public class LiteraryTeam implements Serializable {
+public class LiteraryTeamVO implements Serializable {
 
     private static final long serialVersionUID=1L;
 
@@ -32,11 +32,6 @@ public class LiteraryTeam implements Serializable {
      */
     @TableId(value = "TID", type = IdType.UUID)
     private String tid;
-
-    /**
-     * 团队名
-     */
-    private String name;
 
     /**
      * 申请人
@@ -189,5 +184,5 @@ public class LiteraryTeam implements Serializable {
      */
     private Integer state;
 
-
+    private List<LitTeamMember> teamMemberList;
 }

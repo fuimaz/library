@@ -1,7 +1,11 @@
 package com.hk.culture.mini.program.service;
 
-import com.hk.culture.mini.program.entity.LiteraryTeam;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.hk.culture.mini.program.dto.Result;
+import com.hk.culture.mini.program.dto.query.PagesQuery;
+import com.hk.culture.mini.program.dto.vo.LiteraryTeamVO;
+import com.hk.culture.mini.program.entity.LiteraryTeam;
 
 /**
  * <p>
@@ -13,4 +17,13 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface LiteraryTeamService extends IService<LiteraryTeam> {
 
+    Result<LiteraryTeamVO> getByTid(String tid);
+
+    IPage<LiteraryTeamVO> listByCondition(PagesQuery<LiteraryTeam> pagesQuery);
+
+    Result<Boolean> add(LiteraryTeamVO literaryTeamVO);
+
+    Result<Boolean> updateByTid(LiteraryTeamVO routeVO);
+
+    Result<Boolean> deleteByTid(String tid, String operator);
 }
