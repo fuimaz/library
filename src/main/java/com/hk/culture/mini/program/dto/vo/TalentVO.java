@@ -185,14 +185,14 @@ public class TalentVO implements Serializable {
                 if (null == files) {
                     continue;
                 }
-                System.out.println("文件:" + files.getAbsolutePath());
+//                System.out.println("文件:" + files.getAbsolutePath());
                 fileNum++;
                 fileNames.add(files.getAbsolutePath());
             }
         } else {
             System.out.println("文件不存在!");
         }
-        System.out.println("文件夹数量:" + folderNum + ",文件数量:" + fileNum);
+//        System.out.println("文件夹数量:" + folderNum + ",文件数量:" + fileNum);
 
         return fileNames;
     }
