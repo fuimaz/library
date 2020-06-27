@@ -120,6 +120,7 @@ public class Talent implements Serializable {
     /**
      * 顺序
      */
+    @TableField("`order`")
     private Integer order;
 
     /**

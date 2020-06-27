@@ -170,7 +170,38 @@ public class LiteraryTeam implements Serializable {
     /**
      * 照片
      */
-    private String img;
+    @TableField("regImg")
+    private String regImg;
+
+    /**
+     * 照片
+     */
+    @TableField("bizLicImg")
+    private String bizLicImg;
+
+    /**
+     * 照片
+     */
+    @TableField("constitutionImg")
+    private String constitutionImg;
+
+    /**
+     * 照片
+     */
+    @TableField("repIdImg")
+    private String repIdImg;
+
+    /**
+     * 照片
+     */
+    @TableField("equipmentImg")
+    private String equipmentImg;
+
+    /**
+     * 照片
+     */
+    @TableField("addressImg")
+    private String addressImg;
 
     /**
      * 创建时间

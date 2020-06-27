@@ -58,12 +58,22 @@ public class TalentServiceImpl extends ServiceImpl<TalentMapper, Talent> impleme
 
         Talent talent = pagesQuery.getData();
 
-        wrapper.eq("state", talent.getState());
-        wrapper.eq("auditing", talent.getAuditing());
+        // 默认只搜可见的
+        if (talent.getState() == null) {
+            wrapper.eq("`state`", StateEnum.ENABLE.getStateCode());
+        } else {
+            wrapper.eq("`state`", talent.getState());
+        }
 
+        // 默认只搜可见的
+        if (talent.getAuditing() == null) {
+            wrapper.eq("auditing", StateEnum.ENABLE.getStateCode());
+        } else {
+            wrapper.eq("auditing", talent.getAuditing());
+        }
 
         // 对人才按点赞数进行排名展示
-        wrapper.orderByDesc("``order");
+        wrapper.orderByDesc("`order`");
 
         Page<Talent> page = new Page<>(pagesQuery.getCurrent(), pagesQuery.getPageSize());
 

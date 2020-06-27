@@ -61,7 +61,7 @@ public class LiteraryTeamServiceImpl extends ServiceImpl<LiteraryTeamMapper, Lit
 
         literaryTeamVO.setTeamMemberList(teamMembers);
 
-        return Result.success(literaryTeam);
+        return Result.success(literaryTeamVO);
     }
 
 
@@ -82,6 +82,8 @@ public class LiteraryTeamServiceImpl extends ServiceImpl<LiteraryTeamMapper, Lit
         // 默认只搜可见的
         if (literaryTeam.getState() == null) {
             wrapper.eq("`state`", StateEnum.ENABLE.getStateCode());
+        } else {
+            wrapper.eq("state", literaryTeam.getState());
         }
 
         if (pagesQuery.isOrderByDesc()) {
@@ -120,21 +122,20 @@ public class LiteraryTeamServiceImpl extends ServiceImpl<LiteraryTeamMapper, Lit
     @Override
     public Result<Boolean> add(LiteraryTeamVO literaryTeamVO) {
         LiteraryTeam literaryTeam = BeanUtil.convertToBean(literaryTeamVO, LiteraryTeam.class);
-        literaryTeam.setUpdateTime(LocalDateTime.now());
 
         literaryTeam.setUpdateTime(LocalDateTime.now());
         literaryTeam.setCreateTime(LocalDateTime.now());
         literaryTeam.setAuditing(StateEnum.DISABLE.getState());
 
         if (getBaseMapper().insert(literaryTeam) != 1) {
-            return Result.error(ReturnCodeEnum.FAILED, "路线图添加失败");
+            return Result.error(ReturnCodeEnum.FAILED, "团队添加失败");
         }
 
         if (CollectionUtils.isEmpty(literaryTeamVO.getTeamMemberList())) {
             return Result.success(true);
         }
 
-        // 插入关联坐标点信息
+        // 插入队员信息
         for (LitTeamMember litTeamMember : literaryTeamVO.getTeamMemberList()) {
             saveTeamMember(literaryTeam.getTid(), litTeamMember);
         }
@@ -238,7 +239,6 @@ public class LiteraryTeamServiceImpl extends ServiceImpl<LiteraryTeamMapper, Lit
         log.warn("{} delete tid={} record", operator);
         return Result.result(getBaseMapper().deleteById(tid) == 1);
     }
-
 
     private void saveTeamMember(String teamTid, LitTeamMember litTeamMember) {
         litTeamMember.setCreateTime(LocalDateTime.now());
