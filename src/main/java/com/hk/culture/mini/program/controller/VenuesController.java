@@ -8,7 +8,6 @@ import com.hk.culture.mini.program.common.utils.BeanUtil;
 import com.hk.culture.mini.program.dto.Result;
 import com.hk.culture.mini.program.dto.query.PagesQuery;
 import com.hk.culture.mini.program.dto.query.VenuesBookQuery;
-import com.hk.culture.mini.program.dto.vo.ActivityVO;
 import com.hk.culture.mini.program.dto.vo.VenuesVO;
 import com.hk.culture.mini.program.entity.Venues;
 import com.hk.culture.mini.program.service.VenuesService;
@@ -63,7 +62,7 @@ public class VenuesController {
 
         Venues venues = venuesService.getById(id);
 
-        return Result.success(BeanUtil.convertToBean(venues, ActivityVO.class));
+        return Result.success(BeanUtil.convertToBean(venues, VenuesVO.class));
     }
 
     @PostMapping("/book")
