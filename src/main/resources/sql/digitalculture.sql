@@ -455,18 +455,19 @@ CREATE TABLE `talent`  (
 DROP TABLE IF EXISTS `venues`;
 CREATE TABLE `venues`  (
   `TID` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `number` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `detail` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `startTime` datetime(0) NULL DEFAULT NULL,
-  `endTime` datetime(0) NULL DEFAULT NULL,
-  `allCount` int(11) NULL DEFAULT NULL,
-  `state` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `hourCost` decimal(10, 0) NULL DEFAULT NULL,
-  `image` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `video` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `category` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '场馆名',
+  `number` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '场馆人数',
+  `address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '场馆地址',
+  `detail` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '详情',
+  `startTime` datetime(0) NULL DEFAULT NULL COMMENT '开始时间',
+  `endTime` datetime(0) NULL DEFAULT NULL COMMENT '结束时间',
+  `allCount` int(11) NULL DEFAULT NULL COMMENT '全部花费',
+  `state` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '场馆状态',
+  `hourCost` decimal(10, 0) NULL DEFAULT NULL COMMENT '每小时花费',
+  `image` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '场馆图片',
+  `video` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '场馆视频',
+  `category` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '场类型',
+  `tel` varchar(13) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '场馆负责人电话',
   PRIMARY KEY (`TID`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
@@ -476,15 +477,17 @@ CREATE TABLE `venues`  (
 DROP TABLE IF EXISTS `venuesbook`;
 CREATE TABLE `venuesbook`  (
   `TID` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `venuesTid` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `booktime` datetime(0) NULL DEFAULT NULL,
-  `activityTid` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `activityName` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `venuesName` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `responsible` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `responsiblePhone` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `hourCost` decimal(10, 0) NULL DEFAULT NULL,
-  `state` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `venuesTid` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '场馆id',
+  `booktime` datetime(0) NULL DEFAULT NULL COMMENT '操作时间',
+  `startTime` datetime(0) NULL DEFAULT NULL COMMENT '预约开始时间',
+  `endTime` datetime(0) NULL DEFAULT NULL COMMENT '预约结束时间',
+  `activityTid` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '预约活动id',
+  `activityName` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '预约活动id',
+  `venuesName` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '场馆名',
+  `responsible` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '预约人',
+  `responsiblePhone` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '预约人电话',
+  `hourCost` decimal(10, 0) NULL DEFAULT NULL COMMENT '每小时花费',
+  `state` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '状态',
   PRIMARY KEY (`TID`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 

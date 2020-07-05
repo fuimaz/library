@@ -5,6 +5,7 @@ import com.hk.culture.mini.program.common.constant.BookTypeEnum;
 import com.hk.culture.mini.program.entity.Venuesbook;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * <p>
@@ -18,6 +19,7 @@ public interface VenuesbookService extends IService<Venuesbook> {
 
     int bookedActiveRecordCount(String phone);
 
+    List<Venuesbook> listByTidAndDate(String tid, LocalDateTime dateTime, BookTypeEnum bookTypeEnum);
 
     Venuesbook getOneByUserAndId(String phone, BookTypeEnum bookTypeEnum, LocalDateTime bookTime, String sceneId);
 

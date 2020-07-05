@@ -1,5 +1,6 @@
 package com.hk.culture.mini.program.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -18,12 +19,16 @@ import com.hk.culture.mini.program.service.AppointmentService;
 import com.hk.culture.mini.program.service.VenuesService;
 import com.hk.culture.mini.program.service.VenuesbookService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>
@@ -67,6 +72,44 @@ public class VenuesServiceImpl extends ServiceImpl<VenuesMapper, Venues> impleme
         IPage<Venues> activityIPage = getBaseMapper().selectPage(page, wrapper);
 
         return activityIPage;
+    }
+
+    /**
+     * 条件查询，无条件则返回全部分页数据
+     * @param tid
+     * @param date
+     * @return
+     */
+    @Override
+    public List<JSONObject> listBookState(String tid, String date, List<String> intervals) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime dateTime = LocalDateTime.parse(date, formatter);
+
+        List<Venuesbook> venuesbooks = venuesbookService.listByTidAndDate(tid, dateTime, BookTypeEnum.VENUES);
+        if (CollectionUtils.isEmpty(venuesbooks)) {
+            return null;
+        }
+
+        List<JSONObject> resList = new ArrayList<>();
+        for (String interval : intervals) {
+            String[] split = StringUtils.split(interval, "~");
+            if (split.length != 2) {
+                log.error("split string size not equal to 2, {}", interval);
+                continue;
+            }
+//            LocalDateTime startTime = LocalDateTime.ofEpochSecond(Long.valueOf(split[0]),0, ZoneOffset.ofHours(8));
+            LocalDateTime startTime = LocalDateTime.parse(split[0], formatter);
+            for (Venuesbook venuesbook : venuesbooks) {
+                if (venuesbook.getStartTime().equals(startTime)) {
+                    JSONObject jsonObject = new JSONObject();
+                    jsonObject.put("time", interval);
+                    jsonObject.put("booked", true);
+                    resList.add(jsonObject);
+                }
+            }
+        }
+
+        return resList;
     }
 
 
@@ -125,7 +168,7 @@ public class VenuesServiceImpl extends ServiceImpl<VenuesMapper, Venues> impleme
 
     private Result<Boolean> bookedRecordCheck(VenuesBookQuery venuesBookQuery) {
         Venuesbook appointment = venuesbookService.getOneByUserAndId(venuesBookQuery.getMobile(),
-                BookTypeEnum.VENUES, venuesBookQuery.getBookTime(), venuesBookQuery.getTid());
+                BookTypeEnum.VENUES, venuesBookQuery.getStartTime(), venuesBookQuery.getTid());
         if (appointment != null) {
             return Result.error(ReturnCodeEnum.RECORD_EXISTS, "您已预约");
         }
@@ -143,21 +186,25 @@ public class VenuesServiceImpl extends ServiceImpl<VenuesMapper, Venues> impleme
     @Transactional
     public Result addBookRecord(VenuesBookQuery venuesBookQuery, Venues venues) {
         // 只有更新成功才能继续
-        if (!updateBookState(venues.getTid())) {
-            log.error("update venues state failed, tid={}, phone={}, state={}",
-                    venuesBookQuery.getTid(), venuesBookQuery.getMobile(), venues.getState());
-            return Result.error(ReturnCodeEnum.FAILED, "预约失败");
-        }
+        // 场馆预约不因个人预约而限制
+//        if (!updateBookState(venues.getTid())) {
+//            log.error("update venues state failed, tid={}, phone={}, state={}",
+//                    venuesBookQuery.getTid(), venuesBookQuery.getMobile(), venues.getState());
+//            return Result.error(ReturnCodeEnum.FAILED, "预约失败");
+//        }
 
         Venuesbook venuesbook = new Venuesbook();
         venuesbook.setResponsiblePhone(venuesBookQuery.getMobile());
+        venuesbook.setResponsible(venuesBookQuery.getName());
         venuesbook.setActivityName("");
         venuesbook.setActivityTid("");
         venuesbook.setVenuesName(venues.getName());
         venuesbook.setVenuesTid(venues.getTid());
         venuesbook.setState(StateEnum.AUDITING.getState());
         venuesbook.setHourCost(venues.getHourCost());
-        venuesbook.setBooktime(venuesBookQuery.getBookTime());
+        venuesbook.setBooktime(LocalDateTime.now());
+        venuesbook.setStartTime(venuesBookQuery.getStartTime());
+        venuesbook.setEndTime(venuesBookQuery.getEndTime());
 
         boolean ret = venuesbookService.save(venuesbook);
         if (!ret) {

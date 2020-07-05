@@ -1,6 +1,7 @@
 package com.hk.culture.mini.program.controller;
 
 
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hk.culture.mini.program.common.constant.ReturnCodeEnum;
@@ -15,6 +16,8 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * <p>
@@ -72,6 +75,17 @@ public class VenuesController {
         }
 
         return venuesService.book(venuesBookQuery);
+    }
+
+    @PostMapping("/listBookState")
+    public Result<List<JSONObject>> listBookState(@RequestParam("tid") String tid,
+                                                  @RequestParam("bookDate") String bookDate,
+                                                  @RequestParam("intervals") List<String> intervals) {
+        if (StringUtils.isEmpty(bookDate) || StringUtils.isEmpty(tid)) {
+            return Result.error(ReturnCodeEnum.PARAM_ERROR);
+        }
+
+        return Result.success(venuesService.listBookState(tid, bookDate, intervals));
     }
 }
 

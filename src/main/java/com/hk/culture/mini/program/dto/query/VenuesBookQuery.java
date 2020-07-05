@@ -53,7 +53,18 @@ public class VenuesBookQuery implements Serializable {
     /**
      * 预约时间
      */
+    private String bookDate;
+
+    /**
+     * 预约开始时间
+     */
     @NonNull
-    private LocalDateTime bookTime;
+    private LocalDateTime startTime;
+
+    /**
+     * 预约结束时间
+     */
+    @NonNull
+    private LocalDateTime endTime;
 
 }

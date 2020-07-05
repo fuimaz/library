@@ -13,6 +13,7 @@ import com.hk.culture.mini.program.service.VenuesbookService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * <p>
@@ -41,6 +42,30 @@ public class VenuesbookServiceImpl extends ServiceImpl<VenuesbookMapper, Venuesb
         Integer selectCount = getBaseMapper().selectCount(wrapper);
 
         return selectCount == null ? 0 : selectCount;
+    }
+
+    /**
+     * 根据tid查预约记录
+     * @param tid
+     * @return
+     */
+    public List<Venuesbook> listByTidAndDate(String tid, LocalDateTime dateTime, BookTypeEnum bookTypeEnum) {
+        QueryWrapper<Venuesbook> wrapper = new QueryWrapper();
+
+        wrapper.select("venuesTid", "startTime", "endTime");
+        Venuesbook venuesbook = new Venuesbook();
+        if (bookTypeEnum == BookTypeEnum.VENUES) {
+            venuesbook.setVenuesTid(tid);
+        } else {
+            venuesbook.setActivityTid(tid);
+        }
+
+        // 限定已通过、审核中状态
+        wrapper.in("state", StateEnum.ENABLE.getState(), StateEnum.AUDITING.getState());
+        wrapper.between("startTime", dateTime.minusDays(1), dateTime.plusDays(1));
+        wrapper.setEntity(venuesbook);
+
+        return getBaseMapper().selectList(wrapper);
     }
 
     /**
