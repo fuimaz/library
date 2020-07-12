@@ -23,4 +23,6 @@ public interface VenuesbookService extends IService<Venuesbook> {
 
     Venuesbook getOneByUserAndId(String phone, BookTypeEnum bookTypeEnum, LocalDateTime bookTime, String sceneId);
 
+    int getCountByTidAndDate(String tid, LocalDateTime dateTime, BookTypeEnum bookTypeEnum);
+
 }

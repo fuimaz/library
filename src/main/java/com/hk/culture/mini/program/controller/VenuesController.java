@@ -87,5 +87,14 @@ public class VenuesController {
 
         return Result.success(venuesService.listBookState(tid, bookDate, intervals));
     }
+
+    @PostMapping("/listValidByDate")
+    public Result<List<JSONObject>> listValidByDate(@RequestParam("bookDate") String bookDate) {
+        if (StringUtils.isEmpty(bookDate)) {
+            return Result.error(ReturnCodeEnum.PARAM_ERROR);
+        }
+
+        return Result.success(venuesService.listCanBookByDate(bookDate));
+    }
 }
 

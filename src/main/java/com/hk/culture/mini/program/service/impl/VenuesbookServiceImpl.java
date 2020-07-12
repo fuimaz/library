@@ -61,11 +61,35 @@ public class VenuesbookServiceImpl extends ServiceImpl<VenuesbookMapper, Venuesb
         }
 
         // 限定已通过、审核中状态
-        wrapper.in("state", StateEnum.ENABLE.getState(), StateEnum.AUDITING.getState());
+        wrapper.in("`state`", StateEnum.ENABLE.getState(), StateEnum.AUDITING.getState());
         wrapper.between("startTime", dateTime.minusDays(1), dateTime.plusDays(1));
         wrapper.setEntity(venuesbook);
 
         return getBaseMapper().selectList(wrapper);
+    }
+
+    /**
+     * 根据tid查预约记录数
+     * @param tid
+     * @return
+     */
+    public int getCountByTidAndDate(String tid, LocalDateTime dateTime, BookTypeEnum bookTypeEnum) {
+        QueryWrapper<Venuesbook> wrapper = new QueryWrapper();
+
+        wrapper.select("TID");
+        Venuesbook venuesbook = new Venuesbook();
+        if (bookTypeEnum == BookTypeEnum.VENUES) {
+            venuesbook.setVenuesTid(tid);
+        } else {
+            venuesbook.setActivityTid(tid);
+        }
+
+        // 限定已通过、审核中状态
+        wrapper.in("`state`", StateEnum.ENABLE.getState(), StateEnum.AUDITING.getState());
+        wrapper.between("startTime", dateTime.minusDays(1), dateTime.plusDays(1));
+        wrapper.setEntity(venuesbook);
+
+        return getBaseMapper().selectCount(wrapper);
     }
 
     /**

@@ -75,7 +75,7 @@ public class VenuesServiceImpl extends ServiceImpl<VenuesMapper, Venues> impleme
     }
 
     /**
-     * 条件查询，无条件则返回全部分页数据
+     * 查询某个场馆，指定日期的可预约清空
      * @param tid
      * @param date
      * @return
@@ -110,6 +110,37 @@ public class VenuesServiceImpl extends ServiceImpl<VenuesMapper, Venues> impleme
         }
 
         return resList;
+    }
+
+    /**
+     * 条件查询，无条件则返回全部分页数据
+     * @param date
+     * @return
+     */
+    @Override
+    public List<Venues> listCanBookByDate(String date) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime dateTime = LocalDateTime.parse(date, formatter);
+
+        QueryWrapper<Venues> wrapper = new QueryWrapper();
+        wrapper.select("tid");
+        wrapper.eq("`state`", StateEnum.ENABLE.getState());
+
+        List<Venues> venuesList = getBaseMapper().selectList(wrapper);
+
+        List<String> validTids = new ArrayList<>();
+        for (Venues venues : venuesList) {
+            int venuesbooksCnt = venuesbookService.getCountByTidAndDate(venues.getTid(), dateTime, BookTypeEnum.VENUES);
+            if (venuesbooksCnt < 3) {
+                validTids.add(venues.getTid());
+            }
+        }
+
+        if (CollectionUtils.isEmpty(validTids)) {
+            return null;
+        }
+
+        return getBaseMapper().selectBatchIds(validTids);
     }
 
 

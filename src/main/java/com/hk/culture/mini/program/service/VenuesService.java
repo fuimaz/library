@@ -31,4 +31,6 @@ public interface VenuesService extends IService<Venues> {
      */
     List<JSONObject> listBookState(String tid, String date, List<String> intervals);
 
+    List<Venues> listCanBookByDate(String date);
+
 }
