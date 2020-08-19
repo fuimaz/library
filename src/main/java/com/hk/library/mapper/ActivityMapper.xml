@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hk.library.mapping.ActivityMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.hk.library.entity.Activity">
+        <id column="TID" property="tid" />
+        <result column="activityName" property="activityName" />
+        <result column="activityDesc" property="activityDesc" />
+        <result column="activityType" property="activityType" />
+        <result column="responsible" property="responsible" />
+        <result column="isVerify" property="isVerify" />
+        <result column="remarks" property="remarks" />
+        <result column="stratTime" property="stratTime" />
+        <result column="endTime" property="endTime" />
+        <result column="depot" property="depot" />
+        <result column="orders" property="orders" />
+        <result column="company" property="company" />
+        <result column="asstCompany" property="asstCompany" />
+        <result column="responsiblePhone" property="responsiblePhone" />
+        <result column="funds" property="funds" />
+        <result column="oneCost" property="oneCost" />
+        <result column="state" property="state" />
+        <result column="image" property="image" />
+        <result column="video" property="video" />
+        <result column="authMan" property="authMan" />
+        <result column="booked" property="booked" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        TID, activityName, activityDesc, activityType, responsible, isVerify, remarks, stratTime, endTime, depot, orders, company, asstCompany, responsiblePhone, funds, oneCost, state, image, video, authMan, booked
+    </sql>
+
+</mapper>
