@@ -16,44 +16,5 @@ import java.util.List;
 @Component
 @Slf4j
 public class MsgSenderCronTask {
-    @Autowired
-    private MessageService messageService;
 
-    @Scheduled(cron = "0 0/1 * * * ?")
-    public void job() {
-
-        List<Message> messages = messageService.listWaitingMsg();
-        if (CollectionUtils.isEmpty(messages)) {
-            return;
-        }
-
-        for (Message message : messages) {
-            try {
-                message.setState(StateEnum.PROCESSING.getStateCode());
-                if (!updateMsg(message, StateEnum.PROCESSING)) {
-                    log.error("update to processing state failed, tid={}", message.getTid());
-                    continue;
-                }
-
-                // todo 根据情况发送短信或者推送
-                if (!updateMsg(message, StateEnum.ENABLE)) {
-                    log.error("update to enable state failed, tid={}", message.getTid());
-                    continue;
-                }
-            } catch (Exception e) {
-                log.error("", e);
-            }
-        }
-    }
-
-    private boolean updateMsg(Message message, StateEnum update) {
-        // 状态一致时才更新
-        QueryWrapper<Message> wrapper = new QueryWrapper();
-        wrapper.eq("TID", message.getTid());
-        wrapper.eq("state", message.getState());
-
-        Message updateMsg = new Message();
-        updateMsg.setState(update.getStateCode());
-        return messageService.getBaseMapper().update(updateMsg, wrapper) == 1;
-    }
 }
