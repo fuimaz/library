@@ -5,7 +5,6 @@ import javax.sql.DataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.alibaba.druid.pool.DruidDataSource;
 
 
 @Configuration

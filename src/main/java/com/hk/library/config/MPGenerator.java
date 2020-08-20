@@ -21,7 +21,7 @@ public class MPGenerator {
         //全局配置
         GlobalConfig gc = new GlobalConfig();
         gc.setOpen(false);
-        gc.setOutputDir("/Users/jiman/workspace/culture-mini-program/gencode/src/main/java");
+        gc.setOutputDir("/Users/jiman/workspace/library/src/main/java");
         gc.setFileOverride(true); //是否覆盖已有文件
         gc.setBaseResultMap(true); //XML是否需要BaseResultMap
         gc.setBaseColumnList(true); //XML是否显示字段
@@ -37,7 +37,7 @@ public class MPGenerator {
         DataSourceConfig dsc = new DataSourceConfig();
         dsc.setDbType(DbType.MYSQL);
         dsc.setDriverName("com.mysql.cj.jdbc.Driver");
-        dsc.setUrl("jdbc:mysql://localhost:3306/digitalculture?characterEncoding=utf8&useSSL=false");
+        dsc.setUrl("jdbc:mysql://localhost:3306/library?characterEncoding=utf8&useSSL=false");
         dsc.setUsername("root");
         dsc.setPassword("test1234");
         mpg.setDataSource(dsc);
@@ -50,11 +50,11 @@ public class MPGenerator {
         mpg.setStrategy(sc);
         //包配置
         PackageConfig pc = new PackageConfig();
-        pc.setParent("com.hk.culture.mini.program");
+        pc.setParent("com.hk.library");
         pc.setEntity("entity");
         pc.setController("controller");
         pc.setService("service");
-        pc.setServiceImpl("service.impl");
+//        pc.setServiceImpl("service.impl");
         pc.setMapper("mapping");
         pc.setXml("mapper");
         mpg.setPackageInfo(pc);

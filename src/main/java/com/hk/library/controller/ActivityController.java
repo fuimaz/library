@@ -28,5 +28,9 @@ import org.springframework.web.bind.annotation.*;
 @ResponseBody
 public class ActivityController {
 
+    @RequestMapping("/home")
+    public String productInfo(){
+        return " admin home page ";
+    }
 }
 
