@@ -20,7 +20,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private SecurityFilterInterceptor securityFilterInterceptor;
 
     @Bean
-    UserDetailsService customUserService(){
+    UserDetailsService customUserService() {
         return new SercurityUserManger();
     }
 

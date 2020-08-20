@@ -8,16 +8,16 @@ import java.time.LocalDateTime;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
- * @author 
+ * @author
  * @since 2020-04-08
  */
 @Data
 public class ActivityVO implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     private String tid;
 

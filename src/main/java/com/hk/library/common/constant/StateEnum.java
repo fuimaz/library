@@ -20,14 +20,6 @@ public enum StateEnum {
         this.stateCode = Integer.valueOf(state);
     }
 
-    public String getState() {
-        return state;
-    }
-
-    public int getStateCode() {
-        return stateCode;
-    }
-
     public static StateEnum getValue(String state) {
         for (StateEnum stateEnum : StateEnum.values()) {
             if (stateEnum.getState().equals(state)) {
@@ -36,6 +28,14 @@ public enum StateEnum {
         }
 
         return null;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public int getStateCode() {
+        return stateCode;
     }
 
     public String toString() {

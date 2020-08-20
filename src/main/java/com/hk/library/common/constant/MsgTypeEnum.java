@@ -15,14 +15,6 @@ public enum MsgTypeEnum {
         this.desc = desc;
     }
 
-    public String getDesc() {
-        return desc;
-    }
-
-    public String getType() {
-        return type;
-    }
-
     public static StateEnum getValue(String type) {
         type = type.toLowerCase();
         for (StateEnum stateEnum : StateEnum.values()) {
@@ -32,5 +24,13 @@ public enum MsgTypeEnum {
         }
 
         return null;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public String getType() {
+        return type;
     }
 }

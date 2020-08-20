@@ -1,19 +1,19 @@
 package com.hk.library.config;
 
+import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 
 import javax.sql.DataSource;
 
 
 @Configuration
 public class MybatisPlusConfig {
-    
+
     /**
      * 配置分页插件
+     *
      * @return
      */
     @Bean

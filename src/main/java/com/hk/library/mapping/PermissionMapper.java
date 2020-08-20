@@ -1,16 +1,16 @@
 package com.hk.library.mapping;
 
-import com.hk.library.entity.Permission;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.hk.library.entity.Permission;
 
 import java.util.List;
 
 /**
  * <p>
- *  Mapper 接口
+ * Mapper 接口
  * </p>
  *
- * @author 
+ * @author
  * @since 2020-08-20
  */
 public interface PermissionMapper extends BaseMapper<Permission> {

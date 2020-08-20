@@ -10,10 +10,10 @@ import java.time.LocalDateTime;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
- * @author 
+ * @author
  * @since 2020-04-08
  */
 @Data
@@ -21,7 +21,7 @@ import java.time.LocalDateTime;
 @Accessors(chain = true)
 public class ActivityBookQuery implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     /**
      * 预约活动id

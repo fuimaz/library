@@ -4,9 +4,9 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.hk.library.entity.User">
-        <id column="id" property="id" />
-        <result column="name" property="name" />
-        <result column="pwd" property="pwd" />
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="pwd" property="pwd"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->

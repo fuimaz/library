@@ -16,18 +16,18 @@ public class Result<T> {
 
 
     public Result(ReturnCodeEnum returnCodeEnum) {
-        this.code = returnCodeEnum.SUCCESS.getCode();
+        this.code = ReturnCodeEnum.SUCCESS.getCode();
         this.msg = returnCodeEnum.getMsg();
     }
 
-    public static <T> Result success(T t){
+    public static <T> Result success(T t) {
         Result result = new Result(ReturnCodeEnum.SUCCESS);
 
         result.setData(t);
         return result;
     }
 
-    public static Result result(boolean r){
+    public static Result result(boolean r) {
         Result<Boolean> result = new Result(ReturnCodeEnum.SUCCESS);
         if (r) {
             result.setCode(ReturnCodeEnum.SUCCESS.getCode());
@@ -41,17 +41,17 @@ public class Result<T> {
         return result;
     }
 
-    public static <T> Result error(int code, String msg){
+    public static <T> Result error(int code, String msg) {
         Result<T> result = new Result<>(code, msg, null);
         return result;
     }
 
-    public static <T> Result error(ReturnCodeEnum returnCodeEnum, String msg){
+    public static <T> Result error(ReturnCodeEnum returnCodeEnum, String msg) {
         Result<T> result = new Result<>(returnCodeEnum.getCode(), msg, null);
         return result;
     }
 
-    public static <T> Result error(ReturnCodeEnum returnCodeEnum){
+    public static <T> Result error(ReturnCodeEnum returnCodeEnum) {
         Result<T> result = new Result<>(returnCodeEnum.getCode(), returnCodeEnum.getMsg(), null);
         return result;
     }

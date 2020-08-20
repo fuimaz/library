@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProductTestController {
 
     @RequestMapping("/info")
-    public String productInfo(){
+    public String productInfo() {
         return " some product info ";
     }
 

@@ -1,14 +1,14 @@
 package com.hk.library.service;
 
-import com.hk.library.entity.RoleUser;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.hk.library.entity.RoleUser;
 
 /**
  * <p>
- *  服务类
+ * 服务类
  * </p>
  *
- * @author 
+ * @author
  * @since 2020-08-20
  */
 public interface RoleUserService extends IService<RoleUser> {

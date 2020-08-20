@@ -11,13 +11,13 @@ import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 
 
 public class MPGenerator {
-    
+
     public static void main(String[] args) {
         //创建代码生成器
         AutoGenerator mpg = new AutoGenerator();
         //指定模板引擎  默认velocity 
         //mpg.setTemplateEngine(new FreemarkerTemplateEngine());
-        
+
         //全局配置
         GlobalConfig gc = new GlobalConfig();
         gc.setOpen(false);
@@ -32,7 +32,7 @@ public class MPGenerator {
         gc.setXmlName("%sMapper");
         gc.setAuthor("");
         gc.setIdType(IdType.UUID);
-        mpg.setGlobalConfig(gc);    
+        mpg.setGlobalConfig(gc);
         //数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
         dsc.setDbType(DbType.MYSQL);
@@ -58,7 +58,7 @@ public class MPGenerator {
         pc.setMapper("mapping");
         pc.setXml("mapper");
         mpg.setPackageInfo(pc);
-    
+
         mpg.execute();
     }
 

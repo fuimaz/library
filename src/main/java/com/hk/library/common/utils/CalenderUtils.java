@@ -7,7 +7,7 @@ import java.util.Calendar;
 import java.util.TimeZone;
 
 public class CalenderUtils {
- 
+
     /**
      * 获取指定某一天的开始时间戳
      *
@@ -25,7 +25,7 @@ public class CalenderUtils {
         calendar.set(Calendar.MILLISECOND, 0);
         return calendar.getTimeInMillis();
     }
- 
+
     /**
      * 获取指定某一天的结束时间戳
      *
@@ -43,7 +43,7 @@ public class CalenderUtils {
         calendar.set(Calendar.MILLISECOND, 999);
         return calendar.getTimeInMillis();
     }
- 
+
     /**
      * 获取当月开始时间戳
      *
@@ -64,7 +64,7 @@ public class CalenderUtils {
         calendar.set(Calendar.MILLISECOND, 0);
         return calendar.getTimeInMillis();
     }
- 
+
     /**
      * 获取当月的结束时间戳
      *
@@ -85,7 +85,7 @@ public class CalenderUtils {
         calendar.set(Calendar.MILLISECOND, 999);
         return calendar.getTimeInMillis();
     }
- 
+
     /**
      * 获取当年的开始时间戳
      *
@@ -107,7 +107,7 @@ public class CalenderUtils {
         calendar.set(Calendar.MILLISECOND, 0);
         return calendar.getTimeInMillis();
     }
- 
+
     /**
      * 获取当年的最后时间戳
      *
@@ -129,7 +129,7 @@ public class CalenderUtils {
         calendar.roll(Calendar.DAY_OF_YEAR, -1);
         return calendar.getTimeInMillis();
     }
- 
+
     /**
      * 时间戳转字符串
      *
@@ -142,7 +142,7 @@ public class CalenderUtils {
         LocalDateTime localDateTime = LocalDateTime.ofInstant(Instant.ofEpochMilli(timestamp), timezone);
         return localDateTime.toString();
     }
- 
+
     public static void main(String[] args) {
         Long currentTime = System.currentTimeMillis();
         System.out.println("Current Time : " + currentTime + " = " + timestampToStr(currentTime, "GMT+8"));
@@ -152,7 +152,7 @@ public class CalenderUtils {
         Long monthEnd = getMonthEndTime(currentTime, "GMT+8:00");
         Long yearStart = getYearStartTime(currentTime, "GMT+8:00");
         Long yearEnd = getYearEndTime(currentTime, "GMT+8:00");
- 
+
         System.out.println("Daily Start : " + dailyStart + " = " + timestampToStr(dailyStart, "GMT+8") + " Daily End : " + dailyEnd + " = " + timestampToStr(dailyEnd, "GMT+8"));
         System.out.println("Month Start : " + monthStart + " = " + timestampToStr(monthStart, "GMT+8") + " Month End : " + monthEnd + " = " + timestampToStr(monthEnd, "GMT+8"));
         System.out.println("Year Start : " + yearStart + " = " + timestampToStr(yearStart, "GMT+8") + " Year End : " + yearEnd + " = " + timestampToStr(yearEnd, "GMT+8"));

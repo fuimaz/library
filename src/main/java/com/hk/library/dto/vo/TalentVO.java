@@ -11,16 +11,16 @@ import java.util.List;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
- * @author 
+ * @author
  * @since 2020-04-08
  */
 @Data
 public class TalentVO implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     private String tid;
 
@@ -101,7 +101,7 @@ public class TalentVO implements Serializable {
      */
     private String img;
 
-    public static void main(String arg[]) throws Exception {
+    public static void main(String[] arg) throws Exception {
         List<String> fileNames = folderMethod1("/Users/jiman/workspace/culture-mini-program/src/main/java/com/hk/culture/mini/program/entity");
 
         String comment = "";

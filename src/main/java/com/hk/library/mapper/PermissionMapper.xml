@@ -4,11 +4,11 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.hk.library.entity.Permission">
-        <id column="id" property="id" />
-        <result column="name" property="name" />
-        <result column="description" property="description" />
-        <result column="url" property="url" />
-        <result column="pid" property="pid" />
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="description" property="description"/>
+        <result column="url" property="url"/>
+        <result column="pid" property="pid"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->

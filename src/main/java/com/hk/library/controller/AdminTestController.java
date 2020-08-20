@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AdminTestController {
 
     @RequestMapping("/home")
-    public String productInfo(){
+    public String productInfo() {
         return " admin home page ";
     }
 }

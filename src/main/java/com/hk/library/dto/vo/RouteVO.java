@@ -13,7 +13,7 @@ import java.util.List;
  * 路线图表
  * </p>
  *
- * @author 
+ * @author
  * @since 2020-05-12
  */
 @Data
@@ -21,7 +21,7 @@ import java.util.List;
 @Accessors(chain = true)
 public class RouteVO implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     private String tid;
 

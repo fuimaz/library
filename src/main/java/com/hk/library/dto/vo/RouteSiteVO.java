@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
  * 标注点表
  * </p>
  *
- * @author 
+ * @author
  * @since 2020-05-12
  */
 @Data
@@ -22,7 +22,7 @@ import java.time.LocalDateTime;
 @Accessors(chain = true)
 public class RouteSiteVO implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     /**
      * 标注点tid

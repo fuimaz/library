@@ -1,14 +1,14 @@
 package com.hk.library.mapping;
 
-import com.hk.library.entity.RoleUser;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.hk.library.entity.RoleUser;
 
 /**
  * <p>
- *  Mapper 接口
+ * Mapper 接口
  * </p>
  *
- * @author 
+ * @author
  * @since 2020-08-20
  */
 public interface RoleUserMapper extends BaseMapper<RoleUser> {

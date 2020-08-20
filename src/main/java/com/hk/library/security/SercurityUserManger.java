@@ -2,8 +2,6 @@ package com.hk.library.security;
 
 import com.hk.library.entity.Permission;
 import com.hk.library.entity.User;
-import com.hk.library.mapping.PermissionMapper;
-import com.hk.library.mapping.UserMapper;
 import com.hk.library.service.PermissionService;
 import com.hk.library.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -31,7 +29,7 @@ public class SercurityUserManger implements UserDetailsService {
             List<Permission> permissions = permissionService.getByAdminUserId(user.getId());
             List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
             for (Permission permission : permissions) {
-                if (permission != null && permission.getName()!=null) {
+                if (permission != null && permission.getName() != null) {
                     GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(permission.getName());
                     grantedAuthorities.add(grantedAuthority);
                 }

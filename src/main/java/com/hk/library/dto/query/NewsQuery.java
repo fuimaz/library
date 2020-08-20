@@ -8,10 +8,10 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
- * @author 
+ * @author
  * @since 2020-04-08
  */
 @Data
@@ -19,7 +19,7 @@ import java.io.Serializable;
 @Accessors(chain = true)
 public class NewsQuery implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     /**
      * 关键字
