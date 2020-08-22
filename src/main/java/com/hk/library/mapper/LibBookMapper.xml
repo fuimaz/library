@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hk.library.mapper.LibBookMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.hk.library.entity.LibBook">
+        <id column="id" property="id" />
+        <result column="book_name" property="bookName" />
+        <result column="book_intro" property="bookIntro" />
+        <result column="book_price" property="bookPrice" />
+        <result column="type_id" property="typeId" />
+        <result column="pub_id" property="pubId" />
+        <result column="image_url" property="imageUrl" />
+        <result column="author" property="author" />
+        <result column="repertory_size" property="repertorySize" />
+        <result column="status" property="status" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, book_name, book_intro, book_price, type_id, pub_id, image_url, author, repertory_size, status, create_time, update_time
+    </sql>
+
+    <update id="updateRepertoryCnt" parameterType="int">
+        UPDATE PRAC_PERSON SET repertory_size += #{updateCnt} WHERE id=#{id}
+    </update>
+
+</mapper>

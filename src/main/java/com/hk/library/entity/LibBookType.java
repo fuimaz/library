@@ -11,7 +11,7 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 权限表
+ * 书籍类型
  * </p>
  *
  * @author 
@@ -20,30 +20,26 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("permission")
-public class Permission implements Serializable {
+@TableName("lib_book_type")
+public class LibBookType implements Serializable {
 
     private static final long serialVersionUID=1L;
 
+    /**
+     * 主键
+     */
     @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    private Integer id;
 
     /**
-     * 权限名
+     * 种类名称
      */
-    private String name;
+    private String typeName;
 
     /**
-     * 描述
+     * 种类简介
      */
-    private String description;
-
-    /**
-     * 路径
-     */
-    private String url;
-
-    private Long pid;
+    private String typeIntro;
 
     private Integer status;
 

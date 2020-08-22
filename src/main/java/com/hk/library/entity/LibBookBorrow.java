@@ -11,7 +11,7 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 权限表
+ * 书的借出归还记录
  * </p>
  *
  * @author 
@@ -20,30 +20,26 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("permission")
-public class Permission implements Serializable {
+@TableName("lib_book_borrow")
+public class LibBookBorrow implements Serializable {
 
     private static final long serialVersionUID=1L;
 
+    /**
+     * 书名称
+     */
     @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    private Integer id;
 
     /**
-     * 权限名
+     * 书id
      */
-    private String name;
+    private Integer bookId;
 
     /**
-     * 描述
+     * 用户id
      */
-    private String description;
-
-    /**
-     * 路径
-     */
-    private String url;
-
-    private Long pid;
+    private Integer userId;
 
     private Integer status;
 

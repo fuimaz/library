@@ -4,11 +4,8 @@ public enum StateEnum {
 
     DISABLE("0"),
     ENABLE("1"),
-    CANCEL("2"),
-    AUDITING("3"),
-    BOOKED("4"),
-    WAITING("5"),
-    PROCESSING("6"),
+    BORROWING("2"),
+    BORROWED("3"),
 
     ;
 

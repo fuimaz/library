@@ -6,18 +6,19 @@ import java.io.Serializable;
 
 /**
  * <p>
- *
+ * 
  * </p>
  *
- * @author
+ * @author 
  * @since 2020-04-08
  */
 @Data
 public class PagesQuery<T> implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID=1L;
 
     private boolean orderByDesc = true;
+
     private String orderByType;
 
     private T data;
