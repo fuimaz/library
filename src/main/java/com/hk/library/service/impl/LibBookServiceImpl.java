@@ -18,10 +18,12 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.concurrent.TimeUnit;
 
 /**
  * <p>
@@ -36,6 +38,8 @@ import java.time.LocalDateTime;
 public class LibBookServiceImpl extends ServiceImpl<LibBookMapper, LibBook> implements LibBookService {
     @Autowired
     private LibBookBorrowService libBookBorrowService;
+    @Autowired
+    private RedisTemplate<String, Object> redisTemplate;
 
     @Override
     public IPage<LibBook> listByCondition(PagesQuery<BookQuery> pagesQuery) {
@@ -67,6 +71,22 @@ public class LibBookServiceImpl extends ServiceImpl<LibBookMapper, LibBook> impl
     }
 
     @Override
+    public Result<Boolean> borrowCheck(int userId, int bookId) {
+        if (getBaseMapper().selectById(bookId) == null) {
+            log.warn("book no exist userId={}, bookId={}", userId, bookId);
+            return Result.error(ReturnCodeEnum.FAILED);
+        }
+
+        Boolean bookOp = redisTemplate.opsForValue().setIfAbsent(getBorrowOpKey(userId, bookId), "1", 10, TimeUnit.SECONDS);
+        if (!bookOp) {
+            log.warn("borrowBook concurrent error, userId={}, bookId={}", userId, bookId);
+            return Result.error(ReturnCodeEnum.FAILED);
+        }
+
+        return Result.success(true);
+    }
+
+    @Override
     @Transactional
     public Result<Boolean> borrowBook(int userId, int bookId) {
         LibBookBorrow activeByUserIdAndBookId = libBookBorrowService.getActiveByUserIdAndBookId(userId, bookId);
@@ -81,12 +101,13 @@ public class LibBookServiceImpl extends ServiceImpl<LibBookMapper, LibBook> impl
             throw new BixException("添加预约记录失败");
         }
 
-
-        int repertoryCnt = getBaseMapper().updateRepertoryCnt(-1, bookId);
+        int repertoryCnt = getBaseMapper().reduceRepertoryCnt(1, bookId);
         if (repertoryCnt != 1) {
             log.error("update repertory count failed, userId={}, bookId={}", userId, bookId);
             throw new BixException("添加预约记录失败");
         }
+
+        redisTemplate.delete(getBorrowOpKey(userId, bookId));
 
         return Result.success(true);
     }
@@ -106,13 +127,18 @@ public class LibBookServiceImpl extends ServiceImpl<LibBookMapper, LibBook> impl
             throw new BixException("归还图书操作失败");
         }
 
-
-        int repertoryCnt = getBaseMapper().updateRepertoryCnt(1, bookId);
+        int repertoryCnt = getBaseMapper().addRepertoryCnt(1, bookId);
         if (repertoryCnt != 1) {
             log.error("update repertory count failed, userId={}, bookId={}", userId, bookId);
             throw new BixException("归还图书操作失败");
         }
 
+        redisTemplate.delete(getBorrowOpKey(userId, bookId));
+
         return Result.success(true);
+    }
+
+    private String getBorrowOpKey(int userId, int bookId) {
+        return String.format("%s_%d_%d", "bookOp", userId, bookId);
     }
 }

@@ -15,5 +15,5 @@ import java.util.List;
  */
 public interface PermissionMapper extends BaseMapper<Permission> {
 
-    List<Permission> findByAdminUserId(long userId);
+    List<Permission> getByAdminUserId(long userId);
 }

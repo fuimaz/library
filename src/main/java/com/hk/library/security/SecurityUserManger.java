@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
-public class SercurityUserManger implements UserDetailsService {
+public class SecurityUserManger implements UserDetailsService {
     @Autowired
     private UserService userService;
     @Autowired

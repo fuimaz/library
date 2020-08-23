@@ -1,7 +1,7 @@
 package com.hk.library.service;
 
-import com.hk.library.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.hk.library.entity.User;
 
 /**
  * <p>
@@ -13,4 +13,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface UserService extends IService<User> {
 
+    User getByName(String name);
 }

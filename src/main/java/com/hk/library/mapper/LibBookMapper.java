@@ -14,5 +14,7 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface LibBookMapper extends BaseMapper<LibBook> {
 
-    int updateRepertoryCnt(@Param("updateCnt") int updateCnt, @Param("id") int id);
+    int addRepertoryCnt(@Param("updateCnt") int updateCnt, @Param("id") int id);
+
+    int reduceRepertoryCnt(@Param("updateCnt") int updateCnt, @Param("id") int id);
 }

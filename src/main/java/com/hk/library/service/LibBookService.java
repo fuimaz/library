@@ -21,6 +21,8 @@ public interface LibBookService extends IService<LibBook> {
 
     boolean addBook(LibBook libBook);
 
+    Result<Boolean> borrowCheck(int userId, int bookId);
+
     Result<Boolean> borrowBook(int userId, int bookId);
 
     Result<Boolean> returnBook(int userId, int bookId);

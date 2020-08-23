@@ -23,8 +23,12 @@
         id, book_name, book_intro, book_price, type_id, pub_id, image_url, author, repertory_size, status, create_time, update_time
     </sql>
 
-    <update id="updateRepertoryCnt" parameterType="int">
-        UPDATE PRAC_PERSON SET repertory_size += #{updateCnt} WHERE id=#{id}
+    <update id="addRepertoryCnt" parameterType="int">
+      UPDATE lib_book SET `repertory_size` = `repertory_size` + #{updateCnt} WHERE `id`=#{id}
+    </update>
+
+    <update id="reduceRepertoryCnt" parameterType="int">
+      UPDATE lib_book SET `repertory_size` = `repertory_size` - #{updateCnt} WHERE `id`=#{id}
     </update>
 
 </mapper>
