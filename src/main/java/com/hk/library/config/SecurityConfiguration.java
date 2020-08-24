@@ -42,13 +42,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-//                .mvcMatchers("/libBook/**")
+                .antMatchers("/libBook**").permitAll()
+                .antMatchers("/product/**").permitAll()
+                .antMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest()
                 .authenticated()
                 .and()
                 .formLogin()
-//                .loginPage("/login")
-//                .failureUrl("/login?error")
                 .permitAll()
                 .and()
                 .logout().permitAll();
@@ -59,8 +59,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring()
-                .antMatchers("/swagger.html")
-                .antMatchers("/v2/api-docs")
                 .antMatchers("/libBook/**");
     }
 }

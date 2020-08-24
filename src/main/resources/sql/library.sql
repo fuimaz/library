@@ -102,8 +102,8 @@ CREATE TABLE IF NOT EXISTS `lib_book_borrow` (
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT='书的借出归还记录';
 
 
-insert into USER (id, name, pwd, status, create_time, update_time) values (1, 'admin', 'admin', 1, now(), now());
-insert into USER (id, name, pwd, status, create_time, update_time) values (2,'abel', 'abel', 1, now(), now());
+insert into USER (id, name, pwd, status, create_time, update_time) values (1, 'admin', '$2a$10$oRW15xDfepZR3HWjJ.fwNOvs2H3Fwt.4yN4cvkJhBCzjWjifCkqCi', 1, now(), now());
+insert into USER (id, name, pwd, status, create_time, update_time) values (2,'abel', '$2a$10$32fpuIiMEHaijsOyxKxyIeMW1gqWKWfi7cFi155wYMkqUW4g084h6', 1, now(), now());
 
 insert into ROLE(id, name, status, create_time, update_time) values(1,'ROLE_ADMIN', 1, now(), now());
 insert into ROLE(id, name, status, create_time, update_time) values(2,'ROLE_USER', 1, now(), now());
@@ -113,4 +113,6 @@ insert into ROLE_USER(USER_ID, role_id, status, create_time, update_time) values
 
 INSERT INTO `permission` VALUES ('1', 'ROLE_HOME', 'home', '/', null, 1, now(), now()), ('2', 'ROLE_ADMIN', 'ABel', '/admin', null, 1, now(), now());
 INSERT INTO `permission_role` VALUES ('1', '1', '1', 1, now(), now()), ('2', '1', '2', 1, now(), now()), ('3', '2', '1', 1, now(), now());
+
+INSERT INTO `library`.`lib_book`(`id`, `book_name`, `book_intro`, `book_price`, `type_id`, `pub_id`, `image_url`, `author`, `repertory_size`, `status`, `create_time`, `update_time`) VALUES (1, 'test', 'test', 11111, 1, 1, '1', '1', 0, 1, '2020-08-23 19:52:54', '2020-08-23 19:52:58');
  
