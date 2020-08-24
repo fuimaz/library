@@ -44,7 +44,9 @@ public class SecurityFilterInterceptor extends AbstractSecurityInterceptor imple
         //fi里面有一个被拦截的url
         //里面调用MyInvocationSecurityMetadataSource的getAttributes(Object object)这个方法获取fi对应的所有权限
         //再调用MyAccessDecisionManager的decide方法来校验用户的权限是否足够
-        if (!fi.getRequestUrl().contains("/libBook")) {
+        if (fi.getRequestUrl().contains("/libBook")  ) {
+            fi.getChain().doFilter(fi.getRequest(), fi.getResponse());
+        } else {
             InterceptorStatusToken token = super.beforeInvocation(fi);
             try {
                 //执行下一个拦截器
@@ -52,8 +54,7 @@ public class SecurityFilterInterceptor extends AbstractSecurityInterceptor imple
             } finally {
                 super.afterInvocation(token, null);
             }
-        } else {
-            fi.getChain().doFilter(fi.getRequest(), fi.getResponse());
+
         }
 
     }

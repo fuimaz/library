@@ -58,7 +58,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/libBook/**");
+        web.ignoring()
+                .antMatchers("/swagger.html")
+                .antMatchers("/v2/api-docs")
+                .antMatchers("/libBook/**");
     }
 }
 

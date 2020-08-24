@@ -11,6 +11,8 @@ import com.hk.library.dto.query.PagesQuery;
 import com.hk.library.dto.vo.LibBookVO;
 import com.hk.library.entity.LibBook;
 import com.hk.library.service.LibBookService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -25,12 +27,14 @@ import org.springframework.stereotype.Controller;
  * @author 
  * @since 2020-08-22
  */
+@Api(tags = "图书管理")
 @RestController
 @RequestMapping("/libBook")
 public class LibBookController {
     @Autowired
     private LibBookService libBookService;
 
+    @ApiOperation("分页查询图书信息")
     @PostMapping("/list")
     public Result<Page<LibBook>> list(@RequestBody PagesQuery<BookQuery> pagesQuery) {
         if (pagesQuery == null) {
@@ -51,6 +55,7 @@ public class LibBookController {
         return Result.success(libBookVOIPage);
     }
 
+    @ApiOperation("添加书籍")
     @PostMapping("/add")
     public Result<Boolean> add(@RequestBody LibBook libBook) {
         if (libBook == null) {
@@ -60,6 +65,7 @@ public class LibBookController {
         return Result.success(libBookService.addBook(libBook));
     }
 
+    @ApiOperation("借书")
     @GetMapping("/borrow")
     public Result<Boolean> borrow(int userId, int bookId) {
         Result<Boolean> result = libBookService.borrowCheck(userId, bookId);
@@ -70,6 +76,7 @@ public class LibBookController {
         return Result.success(libBookService.borrowBook(userId, bookId));
     }
 
+    @ApiOperation("还书")
     @GetMapping("/returnBook")
     public Result<Boolean> returnBook(int userId, int bookId) {
         Result<Boolean> result = libBookService.borrowBook(userId, bookId);
