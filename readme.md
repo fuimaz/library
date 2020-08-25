@@ -35,3 +35,23 @@ http://localhost:8081/swagger-ui.html
 图书管理这块有三张表，lib_book_type表记录图书类型信息，lib_book表记录图书信息，其中包括书名，作者，库存等信息，lib_book_borrow表记录借阅信息，借出、归还状态通过字段区分。
 重点讲讲借阅过程，考虑到一个人可以借同本书多次，借阅表没有在这块使用唯一性索引，所以要考虑并发插入时，数据唯一性。这块使用了redis实现轻量化的分布式锁，避免上述问题。借阅方法操作了多张表，所以使用了mysql事务处理，使用的是mysql默认的隔离级别，可重复读。因为事务级别不是串行化的，单单使用事务不能解决上面的并发问题，所以使用了轻量化的分布式锁。
 归还过程与借阅类似。
+
+分页查询书籍
+
+```
+curl --location --request POST 'localhost:8081/libBook/borrow?userId=1&bookId=1' \
+--header 'Content-Type: application/json' \
+--header 'Cookie: _ga=GA1.1.403312007.1545315564; JSESSIONID=9DF3C8E535C8BB0305708D7031CCD10F' \
+--data-raw '{"current": 1, "pageSize": 10, "data": {}}'
+
+```
+
+借阅书籍
+```
+localhost:8081/libBook/borrow?userId=1&bookId=1
+```
+
+归还书籍
+```
+localhost:8081/libBook/returnBook?userId=1&bookId=1
+```

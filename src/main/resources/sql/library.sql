@@ -114,5 +114,5 @@ insert into ROLE_USER(USER_ID, role_id, status, create_time, update_time) values
 INSERT INTO `permission` VALUES ('1', 'ROLE_HOME', 'home', '/', null, 1, now(), now()), ('2', 'ROLE_ADMIN', 'ABel', '/admin', null, 1, now(), now());
 INSERT INTO `permission_role` VALUES ('1', '1', '1', 1, now(), now()), ('2', '1', '2', 1, now(), now()), ('3', '2', '1', 1, now(), now());
 
-INSERT INTO `library`.`lib_book`(`id`, `book_name`, `book_intro`, `book_price`, `type_id`, `pub_id`, `image_url`, `author`, `repertory_size`, `status`, `create_time`, `update_time`) VALUES (1, 'test', 'test', 11111, 1, 1, '1', '1', 0, 1, '2020-08-23 19:52:54', '2020-08-23 19:52:58');
+INSERT INTO `library`.`lib_book`(`id`, `book_name`, `book_intro`, `book_price`, `type_id`, `pub_id`, `image_url`, `author`, `repertory_size`, `status`, `create_time`, `update_time`) VALUES (1, 'test', 'test', 11111, 1, 1, '1', '1', 1, 1, '2020-08-23 19:52:54', '2020-08-23 19:52:58');
  
